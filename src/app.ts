@@ -21,6 +21,8 @@ export class AppWidget extends AppScaffold {
       css`
         :host {
           grid-template-rows: max-content 0px 1fr 0px 0px;
+          --primaryColor: #26a69a;
+          --errorColor: #ef5350;
         }
       `,
     ];

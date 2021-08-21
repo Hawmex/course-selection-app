@@ -128,13 +128,13 @@ export class CourseCardComponent extends Nexinterface {
                 <typography-widget variant="text">
                   نام تدریس‌یار:
                   <typography-widget variant="headline">
-                    ${this.#course?.teachingAssistant.assistantName}
+                    ${this.#course?.teachingAssistant.assistantName ?? '-'}
                   </typography-widget>
                 </typography-widget>
                 <typography-widget variant="text">
                   گروه تدریس‌یار:
                   <typography-widget variant="headline">
-                    ${this.#course?.teachingAssistant.groupNumber}
+                    ${this.#course?.teachingAssistant.groupNumber ?? '-'}
                   </typography-widget>
                 </typography-widget>
                 <typography-widget variant="text">

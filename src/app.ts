@@ -6,6 +6,7 @@ import 'nexinterface/dist/router/router.js';
 import 'nexinterface/dist/snackbar/snackbar.js';
 import 'nexinterface/dist/top-bar/top-bar.js';
 import { css, html, WidgetTemplate } from 'nexwidget';
+import { WithPendingTaskHandler } from 'nexwidget/dist/mixins/pending-task.js';
 import './courses.js';
 
 declare global {
@@ -14,7 +15,7 @@ declare global {
   }
 }
 
-export class AppWidget extends AppScaffold {
+export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
   static get styles(): CSSStyleSheet[] {
     return [
       ...super.styles,
@@ -30,7 +31,7 @@ export class AppWidget extends AppScaffold {
 
   get template(): WidgetTemplate {
     return html`
-      <top-bar-widget app-name="اپ انتخاب واحد"></top-bar-widget>
+      <top-bar-widget ?loading={this.hasPendingTask} app-name="اپ انتخاب واحد"></top-bar-widget>
       <drawer-widget headline="اپ انتخاب واحد" text="نسخه 0.2.0">
         <button-widget
           link="/add-course"

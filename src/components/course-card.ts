@@ -94,7 +94,7 @@ export class CourseCardComponent extends Nexinterface {
           <typography-widget variant="text">
             گروه:
             <typography-widget variant="headline">
-              ${this.#course?.professorName ?? '-'}
+              ${this.#course?.groupNumber ?? '-'}
             </typography-widget>
           </typography-widget>
           <typography-widget variant="text">

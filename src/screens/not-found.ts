@@ -3,14 +3,14 @@ import { html, WidgetTemplate } from 'nexwidget';
 
 declare global {
   interface HTMLElementTagNameMap {
-    'add-course-screen': AddCourseScreen;
+    'not-found-screen': NotFoundScreen;
   }
 }
 
-export class AddCourseScreen extends Screen {
+export class NotFoundScreen extends Screen {
   get template(): WidgetTemplate {
-    return html`Add Course`;
+    return html`Not Found`;
   }
 }
 
-AddCourseScreen.registerAs('add-course-screen');
+NotFoundScreen.registerAs('not-found-screen');

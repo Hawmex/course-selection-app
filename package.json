@@ -1,0 +1,32 @@
+{
+  "name": "course-selection-app",
+  "version": "1.0.0",
+  "description": "An App for making plans for university course selection.",
+  "private": true,
+  "scripts": {
+    "prod": "npx tsc && npx esbuild dist/index.js --splitting --bundle --target=es2020 --outdir=public/build --format=esm --external:*.woff2 --minify",
+    "dev:server": "cd public && npx live-server",
+    "dev:tsc": "npx tsc --watch",
+    "dev:esbuild": "npx esbuild dist/index.js --watch --splitting --bundle --target=es2020 --outdir=public/build --format=esm --external:*.woff2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hawmex/course-selection-app.git"
+  },
+  "keywords": [],
+  "author": "Hamed Aarab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Hawmex/course-selection-app/issues"
+  },
+  "homepage": "https://github.com/Hawmex/course-selection-app#readme",
+  "devDependencies": {
+    "esbuild": "^0.12.22",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "nexinterface": "^3.0.3",
+    "nexstate": "^5.0.7",
+    "nexwidget": "^5.0.6"
+  }
+}

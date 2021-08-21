@@ -32,10 +32,10 @@ export interface AddCourseScreen {
 export class AddCourseScreen extends Screen {
   static #checkIfTimesInterfere(first: { from: Time; to: Time }, second: { from: Time; to: Time }) {
     const [firstStartHour, firstStartMinute] = first.from.split(':').map((part) => Number(part));
-    const [firstEndHour, firstEndMinute] = first.from.split(':').map((part) => Number(part));
+    const [firstEndHour, firstEndMinute] = first.to.split(':').map((part) => Number(part));
 
     const [secondStartHour, secondStartMinute] = second.from.split(':').map((part) => Number(part));
-    const [secondEndHour, secondEndMinute] = second.from.split(':').map((part) => Number(part));
+    const [secondEndHour, secondEndMinute] = second.to.split(':').map((part) => Number(part));
 
     const firstStartStamp = firstStartHour * 60 + firstStartMinute;
     const firstEndStamp = firstEndHour * 60 + firstEndMinute;
@@ -442,7 +442,7 @@ export class AddCourseScreen extends Screen {
         this.#TASessionEndTime!.value! &&
         this.TASessionDays?.length
           ? {
-              assistantName: this.#assistantName!.value!,
+              assistantName: this.#assistantName!.value! ? this.#assistantName!.value! : undefined,
               sessionDays: this.TASessionDays,
               sessionTime: {
                 from: <Time>this.#TASessionStartTime!.value!,

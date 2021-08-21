@@ -7,7 +7,8 @@ export type Course = {
   professorName?: string;
   sessionDays: string[];
   sessionTime: { from: Time; to: Time };
-  examTime?: { from: number; to: number };
+  examDate?: `${number}/${number}`;
+  examTime?: { from: Time; to: Time };
   groupNumber?: number;
   teachingAssistant?: {
     assistantName?: string;

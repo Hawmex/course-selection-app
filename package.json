@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "prod": "npx tsc && npx esbuild dist/index.js --splitting --bundle --target=es2020 --outdir=public/build --format=esm --external:*.woff2 --minify",
-    "dev:server": "cd public && npx live-server",
+    "dev:server": "cd public && npx live-server --entry-file=index.html",
     "dev:tsc": "npx tsc --watch",
     "dev:esbuild": "npx esbuild dist/index.js --watch --splitting --bundle --target=es2020 --outdir=public/build --format=esm --external:*.woff2"
   },
@@ -25,7 +25,8 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "nexinterface": "^3.0.3",
+    "lit-html": "^1.4.1",
+    "nexinterface": "^3.0.9",
     "nexstate": "^5.0.7",
     "nexwidget": "^5.0.6"
   }

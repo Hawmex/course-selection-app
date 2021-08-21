@@ -29,7 +29,6 @@ export class AppWidget extends AppScaffold {
   get template(): WidgetTemplate {
     return html`
       <top-bar-widget app-name="اپ انتخاب واحد"></top-bar-widget>
-
       <drawer-widget headline="اپ انتخاب واحد" text="نسخه 0.1.0">
         <button-widget
           link="/add-course"
@@ -38,23 +37,19 @@ export class AppWidget extends AppScaffold {
           text="افزودن درس"
         ></button-widget>
       </drawer-widget>
-
       <router-widget>
         <route-widget
           path="/"
           component="home-screen"
           .src=${() => import('./screens/home.js')}
         ></route-widget>
-
         <route-widget
           path="/add-course"
           component="add-course-screen"
           .src=${() => import('./screens/add-course.js')}
         ></route-widget>
       </router-widget>
-
       <dialog-widget></dialog-widget>
-
       <snackbar-widget></snackbar-widget>
     `;
   }

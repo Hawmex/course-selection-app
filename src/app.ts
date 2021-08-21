@@ -31,7 +31,7 @@ export class AppWidget extends AppScaffold {
   get template(): WidgetTemplate {
     return html`
       <top-bar-widget app-name="اپ انتخاب واحد"></top-bar-widget>
-      <drawer-widget headline="اپ انتخاب واحد" text="نسخه 0.1.0">
+      <drawer-widget headline="اپ انتخاب واحد" text="نسخه 0.2.0">
         <button-widget
           link="/add-course"
           variant="menu"

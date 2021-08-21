@@ -32,7 +32,6 @@ export interface AddCourseScreen {
 export class AddCourseScreen extends Screen {
   static #checkIfTimesInterfere(first: { from: Time; to: Time }, second: { from: Time; to: Time }) {
     const [firstStartHour, firstStartMinute] = first.from.split(':').map((part) => Number(part));
-
     const [firstEndHour, firstEndMinute] = first.from.split(':').map((part) => Number(part));
 
     const [secondStartHour, secondStartMinute] = second.from.split(':').map((part) => Number(part));
@@ -41,12 +40,12 @@ export class AddCourseScreen extends Screen {
     const firstStartStamp = firstStartHour * 60 + firstStartMinute;
     const firstEndStamp = firstEndHour * 60 + firstEndMinute;
 
-    const scondStartStamp = secondStartHour * 60 + secondStartMinute;
+    const secondStartStamp = secondStartHour * 60 + secondStartMinute;
     const secondEndStamp = secondEndHour * 60 + secondEndMinute;
 
     if (
-      (firstStartStamp >= scondStartStamp && firstStartStamp <= secondEndStamp) ||
-      (firstEndStamp >= scondStartStamp && firstEndStamp <= secondEndStamp)
+      (firstStartStamp > secondStartStamp && firstStartStamp < secondEndStamp) ||
+      (firstEndStamp > secondStartStamp && firstEndStamp < secondEndStamp)
     )
       return true;
     else return false;

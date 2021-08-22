@@ -1,10 +1,10 @@
 import { Nexinterface } from 'nexinterface/dist/base/base';
-import 'nexinterface/dist/paper/paper.js';
 import 'nexinterface/dist/button/button';
+import { addDialog } from 'nexinterface/dist/dialog/dialog';
+import 'nexinterface/dist/paper/paper.js';
+import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar';
 import { css, html, nothing, WidgetTemplate } from 'nexwidget';
 import { Course, courses, deleteCourse } from '../courses.js';
-import { addDialog } from 'nexinterface/dist/dialog/dialog';
-import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -31,7 +31,7 @@ export class CourseCardComponent extends Nexinterface {
         }
 
         :host typography-widget[variant='headline'] {
-          display: inline-flex;
+          display: inherit;
         }
       `,
     ];

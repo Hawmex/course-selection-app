@@ -3,7 +3,7 @@ import 'nexinterface/dist/button/button.js';
 import { activateDrawer } from 'nexinterface/dist/drawer/drawer.js';
 import { Screen } from 'nexinterface/dist/screen/screen.js';
 import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar.js';
-import { html, WidgetTemplate } from 'nexwidget';
+import { html, WidgetAnimation, WidgetTemplate } from 'nexwidget';
 import '../components/course-card.js';
 import { Course, courses } from '../courses';
 
@@ -27,7 +27,7 @@ export class HomeScreen extends Screen {
       trailing: html`
         <button-widget
           variant="text"
-          icon="add"
+          icon="post_add"
           @click=${() => history.pushState({}, document.title, '/add-course')}
         ></button-widget>
       `,
@@ -37,12 +37,22 @@ export class HomeScreen extends Screen {
   }
 
   get template(): WidgetTemplate {
-    return repeat(
-      this.courses!,
-      ({ courseName }) => courseName,
-      ({ courseName }) =>
-        html`<course-card-component course-name=${courseName}></course-card-component>`,
-    );
+    return this.courses!.length
+      ? repeat(
+          this.courses!,
+          ({ courseName }) => courseName,
+          ({ courseName }) =>
+            html`<course-card-component course-name=${courseName}></course-card-component>`,
+        )
+      : html`
+          <typography-widget style="justify-self: center;" variant="text">
+            درسی ندارید. اضافه کنید!
+          </typography-widget>
+        `;
+  }
+
+  get updateOrSlotChangeAnimation(): WidgetAnimation {
+    return this.mountAnimation;
   }
 }
 

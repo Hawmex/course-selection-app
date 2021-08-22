@@ -210,7 +210,7 @@ export class AddCourseScreen extends Screen {
             slot="trailing"
             variant="text"
             text="افزودن روز"
-            icon="add"
+            icon="today"
             @click=${() =>
               addDialog({
                 headline: 'افزودن روز',
@@ -222,7 +222,7 @@ export class AddCourseScreen extends Screen {
                       (day) =>
                         html`
                           <chip-widget
-                            icon="add_circle_outline"
+                            icon="add_circle"
                             text=${day}
                             @click=${() => {
                               this.#addCourseSessionDay(day);
@@ -236,6 +236,8 @@ export class AddCourseScreen extends Screen {
               })}
           ></button-widget>
         </section-widget>
+      </paper-widget>
+      <paper-widget full-width>
         <section-widget variant="inputs">
           <typography-widget variant="headline">تدریس‌یار</typography-widget>
           <input-widget data-key="assistantName" type="text" label="نام استاد"></input-widget>
@@ -274,7 +276,7 @@ export class AddCourseScreen extends Screen {
             slot="trailing"
             variant="text"
             text="افزودن روز"
-            icon="add"
+            icon="today"
             @click=${() =>
               addDialog({
                 headline: 'افزودن روز',
@@ -286,7 +288,7 @@ export class AddCourseScreen extends Screen {
                       (day) =>
                         html`
                           <chip-widget
-                            icon="add_circle_outline"
+                            icon="add_circle"
                             text=${day}
                             @click=${() => {
                               this.#addTASessionDay(day);

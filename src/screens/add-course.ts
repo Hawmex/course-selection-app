@@ -7,7 +7,6 @@ import 'nexinterface/dist/paper/paper.js';
 import { Screen } from 'nexinterface/dist/screen/screen.js';
 import 'nexinterface/dist/section/section.js';
 import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar';
-import 'nexinterface/dist/switch/switch.js';
 import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar';
 import 'nexinterface/dist/typography/typography.js';
 import { html, nothing, WidgetTemplate } from 'nexwidget';

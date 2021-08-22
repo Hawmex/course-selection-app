@@ -51,6 +51,11 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
           component="add-course-screen"
           .src=${() => import('./screens/add-course.js')}
         ></route-widget>
+        <route-widget
+          path="*"
+          component="not-found-screen"
+          .src=${() => import('./screens/not-found.js')}
+        ></route-widget>
       </router-widget>
       <dialog-widget></dialog-widget>
       <snackbar-widget></snackbar-widget>

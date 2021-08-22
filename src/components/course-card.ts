@@ -2,7 +2,9 @@ import { Nexinterface } from 'nexinterface/dist/base/base';
 import 'nexinterface/dist/button/button';
 import { addDialog } from 'nexinterface/dist/dialog/dialog';
 import 'nexinterface/dist/paper/paper.js';
+import 'nexinterface/dist/section/section.js';
 import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar';
+import 'nexinterface/dist/typography/typography.js';
 import { css, html, nothing, WidgetTemplate } from 'nexwidget';
 import { Course, courses, deleteCourse } from '../courses.js';
 
@@ -146,8 +148,8 @@ export class CourseCardComponent extends Nexinterface {
                 <typography-widget variant="text">
                   ساعت جلسات تدریس‌یار:
                   <typography-widget variant="headline">
-                    ${this.#course?.teachingAssistant.sessionTime.from}-${this.#course
-                      ?.teachingAssistant.sessionTime.to}
+                    ${this.#course?.teachingAssistant.sessionTime.from} -
+                    ${this.#course?.teachingAssistant.sessionTime.to}
                   </typography-widget>
                 </typography-widget>
               `

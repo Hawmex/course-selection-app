@@ -3,6 +3,7 @@ import 'nexinterface/dist/button/button.js';
 import { activateDrawer } from 'nexinterface/dist/drawer/drawer.js';
 import { Screen } from 'nexinterface/dist/screen/screen.js';
 import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar.js';
+import 'nexinterface/dist/typography/typography.js';
 import { html, WidgetAnimation, WidgetTemplate } from 'nexwidget';
 import '../components/course-card.js';
 import { Course, courses } from '../courses';

@@ -43,8 +43,8 @@ export class AddCourseScreen extends Screen {
     const secondEndStamp = secondEndHour * 60 + secondEndMinute;
 
     if (
-      (firstStartStamp > secondStartStamp && firstStartStamp < secondEndStamp) ||
-      (firstEndStamp > secondStartStamp && firstEndStamp < secondEndStamp)
+      (firstStartStamp >= secondStartStamp && firstStartStamp < secondEndStamp) ||
+      (firstEndStamp > secondStartStamp && firstEndStamp <= secondEndStamp)
     )
       return true;
     else return false;

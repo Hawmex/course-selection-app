@@ -30,11 +30,11 @@ export interface AddCourseScreen {
 
 export class AddCourseScreen extends Screen {
   static #checkIfTimesInterfere(first: { from: Time; to: Time }, second: { from: Time; to: Time }) {
-    const [firstStartHour, firstStartMinute] = first.from.split(':').map((part) => Number(part));
-    const [firstEndHour, firstEndMinute] = first.to.split(':').map((part) => Number(part));
+    const [firstStartHour, firstStartMinute] = first.from.split(':').map(Number);
+    const [firstEndHour, firstEndMinute] = first.to.split(':').map(Number);
 
-    const [secondStartHour, secondStartMinute] = second.from.split(':').map((part) => Number(part));
-    const [secondEndHour, secondEndMinute] = second.to.split(':').map((part) => Number(part));
+    const [secondStartHour, secondStartMinute] = second.from.split(':').map(Number);
+    const [secondEndHour, secondEndMinute] = second.to.split(':').map(Number);
 
     const firstStartStamp = firstStartHour * 60 + firstStartMinute;
     const firstEndStamp = firstEndHour * 60 + firstEndMinute;
@@ -51,8 +51,8 @@ export class AddCourseScreen extends Screen {
   }
 
   static #checkIfTimeIsWrong(start: Time, end: Time) {
-    const [startHour, startMinute] = start.split(':').map((part) => Number(part));
-    const [endHour, endMinute] = end.split(':').map((part) => Number(part));
+    const [startHour, startMinute] = start.split(':').map(Number);
+    const [endHour, endMinute] = end.split(':').map(Number);
 
     if (startHour * 60 + startMinute >= endHour * 60 + endMinute) return true;
     else return false;
@@ -107,7 +107,7 @@ export class AddCourseScreen extends Screen {
         <button-widget
           variant="text"
           icon="done"
-          @click=${() => this.#submitForm()}
+          @click=${this.#submitForm.bind(this)}
         ></button-widget>
       `,
     });
@@ -360,7 +360,7 @@ export class AddCourseScreen extends Screen {
       } else this.#examEndTime!.invalid = false;
 
       const date = this.#examDate!.value.split('/');
-      const [month, day] = date.map((part) => Number(part));
+      const [month, day] = date.map(Number);
 
       if (
         date.length !== 2 ||

@@ -5,6 +5,7 @@ import 'nexinterface/dist/drawer/drawer.js';
 import 'nexinterface/dist/router/router.js';
 import 'nexinterface/dist/snackbar/snackbar.js';
 import 'nexinterface/dist/top-bar/top-bar.js';
+import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar.js';
 import { css, html, WidgetTemplate } from 'nexwidget';
 import { WithPendingTaskHandler } from 'nexwidget/dist/mixins/pending-task.js';
 import './courses.js';
@@ -27,6 +28,11 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
         }
       `,
     ];
+  }
+
+  addedCallback() {
+    super.addedCallback();
+    setTopBarOptions({ active: false });
   }
 
   get template(): WidgetTemplate {

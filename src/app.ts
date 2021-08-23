@@ -32,7 +32,7 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
   get template(): WidgetTemplate {
     return html`
       <top-bar-widget ?loading=${this.hasPendingTask} app-name="اپ انتخاب واحد"></top-bar-widget>
-      <drawer-widget headline="اپ انتخاب واحد" text="نسخه 1.0.0">
+      <drawer-widget headline="اپ انتخاب واحد" text="نسخه 1.1.0">
         <button-widget
           link="/add-course"
           variant="menu"

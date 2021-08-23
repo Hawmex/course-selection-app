@@ -10,7 +10,7 @@ import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar';
 import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar';
 import 'nexinterface/dist/typography/typography.js';
 import { html, nothing, WidgetTemplate } from 'nexwidget';
-import { addCourse, Course, courses, Time } from '../courses.js';
+import { addCourse, Course, courses, Time, TimeRange } from '../courses.js';
 import '../widgets/chip.js';
 import '../widgets/chips-container.js';
 
@@ -29,7 +29,7 @@ export interface AddCourseScreen {
 }
 
 export class AddCourseScreen extends Screen {
-  static #checkIfTimesInterfere(first: { from: Time; to: Time }, second: { from: Time; to: Time }) {
+  static #checkIfTimesInterfere(first: TimeRange, second: TimeRange) {
     const [firstStartHour, firstStartMinute] = first.from.split(':').map(Number);
     const [firstEndHour, firstEndMinute] = first.to.split(':').map(Number);
 
@@ -61,8 +61,8 @@ export class AddCourseScreen extends Screen {
   static #checkIfSessionsInterfere(
     firstDays: string[],
     secondDays: string[],
-    firstTimes: { from: Time; to: Time },
-    secondTimes: { from: Time; to: Time },
+    firstTimes: TimeRange,
+    secondTimes: TimeRange,
   ) {
     const commonDays = firstDays.filter((day) => secondDays.includes(day));
 

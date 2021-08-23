@@ -1,19 +1,20 @@
 import { Nexstate } from 'nexstate';
 
 export type Time = `${number}:${number}`;
+export type TimeRange = { from: Time; to: Time };
 
 export type Course = {
   courseName: string;
   professorName?: string;
   sessionDays: string[];
-  sessionTime: { from: Time; to: Time };
+  sessionTime: TimeRange;
   examDate?: `${number}/${number}`;
-  examTime?: { from: Time; to: Time };
+  examTime?: TimeRange;
   groupNumber?: number;
   teachingAssistant?: {
     assistantName?: string;
     sessionDays: string[];
-    sessionTime: { from: Time; to: Time };
+    sessionTime: TimeRange;
     groupNumber?: number;
   };
 };

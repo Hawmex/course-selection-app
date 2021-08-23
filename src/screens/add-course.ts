@@ -521,7 +521,7 @@ export class AddCourseScreen extends Screen {
             `,
           });
         else {
-          const allCourses = courses.state;
+          const allCourses = [...courses.state];
           let hasErrors: boolean = false;
 
           for (const c of allCourses) {

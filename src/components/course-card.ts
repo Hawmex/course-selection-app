@@ -43,16 +43,12 @@ export class CourseCardComponent extends Nexinterface {
 
   addedCallback() {
     super.addedCallback();
-    this.#course = [...courses.state.values()].find(
-      ({ courseName }) => courseName === this.courseName,
-    );
+    this.#course = [...courses.state].find(({ courseName }) => courseName === this.courseName);
   }
 
   updatedCallback() {
     super.updatedCallback();
-    this.#course = [...courses.state.values()].find(
-      ({ courseName }) => courseName === this.courseName,
-    );
+    this.#course = [...courses.state].find(({ courseName }) => courseName === this.courseName);
   }
 
   get template(): WidgetTemplate {

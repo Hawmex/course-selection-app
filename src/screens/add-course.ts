@@ -71,7 +71,7 @@ export class AddCourseScreen extends Screen {
     else return false;
   }
 
-  #days = <const>['شنبه', 'یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه'];
+  #days = ['شنبه', 'یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه'];
 
   #courseName?: InputWidget;
   #professorName?: InputWidget;
@@ -90,11 +90,26 @@ export class AddCourseScreen extends Screen {
     super.addedCallback();
     setTopBarOptions({
       headline: 'افزودن درس',
-      trailing: html`<button-widget
-        variant="text"
-        icon="done"
-        @click=${() => this.#submitForm()}
-      ></button-widget>`,
+      leading: {
+        icon: 'arrow_forward',
+        action: () =>
+          addDialog({
+            headline: 'هشدار',
+            body: html`
+              <section-widget variant="paragraphs">
+                <typography-widget variant="text">آیا می‌خواهید خارج شوید؟</typography-widget>
+              </section-widget>
+            `,
+            button: { text: 'بله', action: () => history.back() },
+          }),
+      },
+      trailing: html`
+        <button-widget
+          variant="text"
+          icon="done"
+          @click=${() => this.#submitForm()}
+        ></button-widget>
+      `,
     });
   }
 
@@ -155,7 +170,7 @@ export class AddCourseScreen extends Screen {
       <paper-widget full-width>
         <section-widget variant="inputs">
           <typography-widget variant="headline">درس</typography-widget>
-          <input-widget data-key="courseName" type="text" label="نام درس"></input-widget>
+          <input-widget data-key="courseName" type="text" label="نام درس*"></input-widget>
           <input-widget data-key="professorName" type="text" label="نام استاد"></input-widget>
           <input-widget
             data-key="courseGroupNumber"
@@ -178,12 +193,12 @@ export class AddCourseScreen extends Screen {
           <input-widget
             data-key="sessionStartTime"
             type="time"
-            label="ساعت شروع جلسه"
+            label="ساعت شروع جلسه*"
           ></input-widget>
           <input-widget
             data-key="sessionEndTime"
             type="time"
-            label="ساعت پایان جلسه"
+            label="ساعت پایان جلسه*"
           ></input-widget>
           ${this.courseSessionDays?.length
             ? html`
@@ -637,11 +652,25 @@ export class AddCourseScreen extends Screen {
             }
           }
 
-          if (!hasErrors) {
-            addCourse(course);
-            history.back();
-            addSnackbar({ text: `درس ${course.courseName} اضافه شد.` });
-          }
+          if (!hasErrors)
+            addDialog({
+              headline: 'هشدار',
+              body: html`
+                <section-widget variant="paragraphs">
+                  <typography-widget variant="text"
+                    >آیا از درستی اطلاعات وارد شده مطمئنید؟</typography-widget
+                  >
+                </section-widget>
+              `,
+              button: {
+                text: 'بله',
+                action: () => {
+                  addCourse(course);
+                  history.back();
+                  addSnackbar({ text: `درس ${course.courseName} اضافه شد.` });
+                },
+              },
+            });
         }
       }
     }

@@ -1,5 +1,7 @@
 import { repeat } from 'lit-html/directives/repeat.js';
 import 'nexinterface/dist/button/button.js';
+import 'nexinterface/dist/chip/chip.js';
+import 'nexinterface/dist/chip/chips-container.js';
 import { addDialog, removeDialog } from 'nexinterface/dist/dialog/dialog';
 import 'nexinterface/dist/input/input.js';
 import { InputWidget } from 'nexinterface/dist/input/input.js';
@@ -11,8 +13,6 @@ import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar';
 import 'nexinterface/dist/typography/typography.js';
 import { html, nothing, WidgetTemplate } from 'nexwidget';
 import { addCourse, Course, courses, Time, TimeRange } from '../courses.js';
-import '../widgets/chip.js';
-import '../widgets/chips-container.js';
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -46,7 +46,7 @@ export class HomeScreen extends Screen {
             html`<course-card-component course-name=${courseName}></course-card-component>`,
         )
       : html`
-          <typography-widget style="justify-self: center;" variant="text">
+          <typography-widget style="text-align: center;" variant="text">
             درسی ندارید. اضافه کنید!
           </typography-widget>
         `;

@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "lit-html": "^1.4.1",
-    "nexinterface": "^3.2.0",
+    "nexinterface": "^3.2.4",
     "nexstate": "^5.0.7",
     "nexwidget": "^5.0.7"
   }

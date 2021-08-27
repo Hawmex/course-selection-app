@@ -86,7 +86,7 @@ export class AddCourseScreen extends Screen {
   #TASessionEndTime?: InputWidget;
   #TAGroupNumber?: InputWidget;
 
-  addedCallback() {
+  override addedCallback() {
     super.addedCallback();
     setTopBarOptions({
       headline: 'افزودن درس',
@@ -113,7 +113,7 @@ export class AddCourseScreen extends Screen {
     });
   }
 
-  mountedCallback() {
+  override mountedCallback() {
     super.mountedCallback();
 
     this.#courseName = <InputWidget>(
@@ -165,7 +165,7 @@ export class AddCourseScreen extends Screen {
     );
   }
 
-  get template(): WidgetTemplate {
+  override get template(): WidgetTemplate {
     return html`
       <paper-widget full-width>
         <section-widget variant="inputs">

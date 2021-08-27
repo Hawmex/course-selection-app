@@ -22,12 +22,12 @@
   "homepage": "https://github.com/Hawmex/course-selection-app#readme",
   "devDependencies": {
     "esbuild": "^0.12.23",
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.2"
   },
   "dependencies": {
     "lit-html": "^1.4.1",
-    "nexinterface": "^3.2.4",
-    "nexstate": "^5.0.7",
-    "nexwidget": "^5.0.7"
+    "nexinterface": "^3.3.0",
+    "nexstate": "^5.1.0",
+    "nexwidget": "^5.1.0"
   }
 }

@@ -10,12 +10,12 @@ declare global {
 }
 
 export class NotFoundScreen extends Screen {
-  addedCallback() {
+  override addedCallback() {
     super.addedCallback();
     setTopBarOptions({ headline: 'یافت نشد' });
   }
 
-  get template(): WidgetTemplate {
+  override get template(): WidgetTemplate {
     return html`
       <typography-widget style="justify-self: center;" variant="text">
         صفحه‌ای که به دنبال آن می‌گشتید یافت نشد.

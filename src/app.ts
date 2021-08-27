@@ -17,7 +17,7 @@ declare global {
 }
 
 export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
-  static get styles(): CSSStyleSheet[] {
+  static override get styles(): CSSStyleSheet[] {
     return [
       ...super.styles,
       css`
@@ -30,12 +30,12 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
     ];
   }
 
-  addedCallback() {
+  override addedCallback() {
     super.addedCallback();
     setTopBarOptions({ active: false });
   }
 
-  get template(): WidgetTemplate {
+  override get template(): WidgetTemplate {
     return html`
       <top-bar-widget ?loading=${this.hasPendingTask} app-name="اپ انتخاب واحد"></top-bar-widget>
       <drawer-widget headline="اپ انتخاب واحد" text="نسخه 1.2.0">

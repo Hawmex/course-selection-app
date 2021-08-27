@@ -20,7 +20,7 @@ export interface CourseCardComponent {
 }
 
 export class CourseCardComponent extends Nexinterface {
-  static get styles(): CSSStyleSheet[] {
+  static override get styles(): CSSStyleSheet[] {
     return [
       ...super.styles,
       css`
@@ -41,17 +41,17 @@ export class CourseCardComponent extends Nexinterface {
 
   #course?: Course;
 
-  addedCallback() {
+  override addedCallback() {
     super.addedCallback();
     this.#course = [...courses.state].find(({ courseName }) => courseName === this.courseName);
   }
 
-  updatedCallback() {
+  override updatedCallback() {
     super.updatedCallback();
     this.#course = [...courses.state].find(({ courseName }) => courseName === this.courseName);
   }
 
-  get template(): WidgetTemplate {
+  override get template(): WidgetTemplate {
     return html`
       <paper-widget>
         <section-widget variant="buttons">

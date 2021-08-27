@@ -20,7 +20,7 @@ export interface HomeScreen {
 }
 
 export class HomeScreen extends Screen {
-  addedCallback() {
+  override addedCallback() {
     super.addedCallback();
     setTopBarOptions({
       headline: 'خانه',
@@ -37,7 +37,7 @@ export class HomeScreen extends Screen {
     courses.runAndSubscribe((courses) => (this.courses = [...courses]));
   }
 
-  get template(): WidgetTemplate {
+  override get template(): WidgetTemplate {
     return this.courses!.length
       ? repeat(
           this.courses!,
@@ -52,7 +52,7 @@ export class HomeScreen extends Screen {
         `;
   }
 
-  get updateOrSlotChangeAnimation(): WidgetAnimation {
+  override get updateOrSlotChangeAnimation(): WidgetAnimation {
     return this.mountAnimation;
   }
 }

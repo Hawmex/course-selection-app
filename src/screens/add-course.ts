@@ -6,7 +6,7 @@ import { addDialog, removeDialog } from 'nexinterface/dist/dialog/dialog';
 import 'nexinterface/dist/input/input.js';
 import { InputWidget } from 'nexinterface/dist/input/input.js';
 import 'nexinterface/dist/paper/paper.js';
-import { Screen } from 'nexinterface/dist/screen/screen.js';
+import { Nexscreen } from 'nexinterface/dist/screen/screen.js';
 import 'nexinterface/dist/section/section.js';
 import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar';
 import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar';
@@ -28,7 +28,7 @@ export interface AddCourseScreen {
   set TASessionDays(v: string[] | undefined);
 }
 
-export class AddCourseScreen extends Screen {
+export class AddCourseScreen extends Nexscreen {
   static #checkIfTimesInterfere(first: TimeRange, second: TimeRange) {
     const [firstStartHour, firstStartMinute] = first.from.split(':').map(Number);
     const [firstEndHour, firstEndMinute] = first.to.split(':').map(Number);

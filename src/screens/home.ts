@@ -1,7 +1,7 @@
 import { repeat } from 'lit-html/directives/repeat';
 import 'nexinterface/dist/button/button.js';
 import { activateDrawer } from 'nexinterface/dist/drawer/drawer.js';
-import { Screen } from 'nexinterface/dist/screen/screen.js';
+import { Nexscreen } from 'nexinterface/dist/screen/screen.js';
 import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar.js';
 import 'nexinterface/dist/typography/typography.js';
 import { html, WidgetAnimation, WidgetTemplate } from 'nexwidget';
@@ -19,7 +19,7 @@ export interface HomeScreen {
   set courses(v: Course[] | undefined);
 }
 
-export class HomeScreen extends Screen {
+export class HomeScreen extends Nexscreen {
   override addedCallback() {
     super.addedCallback();
     setTopBarOptions({

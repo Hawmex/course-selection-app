@@ -1,9 +1,9 @@
-import { Nexinterface } from 'nexinterface/dist/base/base';
-import 'nexinterface/dist/button/button';
-import { addDialog } from 'nexinterface/dist/dialog/dialog';
+import { Nexinterface } from 'nexinterface/dist/base/base.js';
+import 'nexinterface/dist/button/button.js';
+import { addDialog } from 'nexinterface/dist/dialog/dialog.js';
 import 'nexinterface/dist/paper/paper.js';
 import 'nexinterface/dist/section/section.js';
-import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar';
+import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar.js';
 import 'nexinterface/dist/typography/typography.js';
 import { css, html, nothing, WidgetTemplate } from 'nexwidget';
 import { Course, courses, deleteCourse } from '../courses.js';
@@ -20,6 +20,12 @@ export interface CourseCardComponent {
 }
 
 export class CourseCardComponent extends Nexinterface {
+  static {
+    this.createAttributes([{ key: 'courseName', type: 'string' }]);
+    this.createReactives(['courseName']);
+    this.registerAs('course-card-component');
+  }
+
   static override get styles(): CSSStyleSheet[] {
     return [
       ...super.styles,
@@ -40,16 +46,6 @@ export class CourseCardComponent extends Nexinterface {
   }
 
   #course?: Course;
-
-  override addedCallback() {
-    super.addedCallback();
-    this.#course = [...courses.state].find(({ courseName }) => courseName === this.courseName);
-  }
-
-  override updatedCallback() {
-    super.updatedCallback();
-    this.#course = [...courses.state].find(({ courseName }) => courseName === this.courseName);
-  }
 
   override get template(): WidgetTemplate {
     return html`
@@ -154,8 +150,14 @@ export class CourseCardComponent extends Nexinterface {
       </paper-widget>
     `;
   }
-}
 
-CourseCardComponent.createAttributes([{ key: 'courseName', type: 'string' }]);
-CourseCardComponent.createReactives(['courseName']);
-CourseCardComponent.registerAs('course-card-component');
+  override addedCallback() {
+    super.addedCallback();
+    this.#course = [...courses.state].find(({ courseName }) => courseName === this.courseName);
+  }
+
+  override updatedCallback() {
+    super.updatedCallback();
+    this.#course = [...courses.state].find(({ courseName }) => courseName === this.courseName);
+  }
+}

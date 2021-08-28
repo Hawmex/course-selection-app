@@ -10,9 +10,8 @@ declare global {
 }
 
 export class NotFoundScreen extends Nexscreen {
-  override addedCallback() {
-    super.addedCallback();
-    setTopBarOptions({ headline: 'یافت نشد' });
+  static {
+    this.registerAs('not-found-screen');
   }
 
   override get template(): WidgetTemplate {
@@ -22,6 +21,9 @@ export class NotFoundScreen extends Nexscreen {
       </typography-widget>
     `;
   }
-}
 
-NotFoundScreen.registerAs('not-found-screen');
+  override addedCallback() {
+    super.addedCallback();
+    setTopBarOptions({ headline: 'یافت نشد' });
+  }
+}

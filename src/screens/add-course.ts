@@ -2,14 +2,14 @@ import { repeat } from 'lit-html/directives/repeat.js';
 import 'nexinterface/dist/button/button.js';
 import 'nexinterface/dist/chip/chip.js';
 import 'nexinterface/dist/chip/chips-container.js';
-import { addDialog, removeDialog } from 'nexinterface/dist/dialog/dialog';
+import { addDialog, removeDialog } from 'nexinterface/dist/dialog/dialog.js';
 import 'nexinterface/dist/input/input.js';
 import { InputWidget } from 'nexinterface/dist/input/input.js';
 import 'nexinterface/dist/paper/paper.js';
 import { Nexscreen } from 'nexinterface/dist/screen/screen.js';
 import 'nexinterface/dist/section/section.js';
-import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar';
-import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar';
+import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar.js';
+import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar.js';
 import 'nexinterface/dist/typography/typography.js';
 import { html, nothing, WidgetTemplate } from 'nexwidget';
 import { addCourse, Course, courses, Time, TimeRange } from '../courses.js';
@@ -29,6 +29,11 @@ export interface AddCourseScreen {
 }
 
 export class AddCourseScreen extends Nexscreen {
+  static {
+    this.createReactives(['TASessionDays', 'courseSessionDays']);
+    this.registerAs('add-course-screen');
+  }
+
   static #checkIfTimesInterfere(first: TimeRange, second: TimeRange) {
     const [firstStartHour, firstStartMinute] = first.from.split(':').map(Number);
     const [firstEndHour, firstEndMinute] = first.to.split(':').map(Number);
@@ -85,85 +90,6 @@ export class AddCourseScreen extends Nexscreen {
   #TASessionStartTime?: InputWidget;
   #TASessionEndTime?: InputWidget;
   #TAGroupNumber?: InputWidget;
-
-  override addedCallback() {
-    super.addedCallback();
-    setTopBarOptions({
-      headline: 'افزودن درس',
-      leading: {
-        icon: 'arrow_forward',
-        action: () =>
-          addDialog({
-            headline: 'هشدار',
-            body: html`
-              <section-widget variant="paragraphs">
-                <typography-widget variant="text">آیا می‌خواهید خارج شوید؟</typography-widget>
-              </section-widget>
-            `,
-            button: { text: 'بله', action: () => history.back() },
-          }),
-      },
-      trailing: html`
-        <button-widget
-          variant="text"
-          icon="done"
-          @click=${this.#submitForm.bind(this)}
-        ></button-widget>
-      `,
-    });
-  }
-
-  override mountedCallback() {
-    super.mountedCallback();
-
-    this.#courseName = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="courseName"]')
-    );
-
-    this.#professorName = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="professorName"]')
-    );
-
-    this.#sessionStartTime = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="sessionStartTime"]')
-    );
-
-    this.#sessionEndTime = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="sessionEndTime"]')
-    );
-
-    this.#examDate = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="examDate"]')
-    );
-
-    this.#examStartTime = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="examStartTime"]')
-    );
-
-    this.#examEndTime = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="examEndTime"]')
-    );
-
-    this.#courseGroupNumber = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="courseGroupNumber"]')
-    );
-
-    this.#assistantName = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="assistantName"]')
-    );
-
-    this.#TASessionStartTime = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="TASessionStartTime"]')
-    );
-
-    this.#TASessionEndTime = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="TASessionEndTime"]')
-    );
-
-    this.#TAGroupNumber = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="TAGroupNumber"]')
-    );
-  }
 
   override get template(): WidgetTemplate {
     return html`
@@ -675,7 +601,83 @@ export class AddCourseScreen extends Nexscreen {
       }
     }
   }
-}
 
-AddCourseScreen.createReactives(['TASessionDays', 'courseSessionDays']);
-AddCourseScreen.registerAs('add-course-screen');
+  override addedCallback() {
+    super.addedCallback();
+    setTopBarOptions({
+      headline: 'افزودن درس',
+      leading: {
+        icon: 'arrow_forward',
+        action: () =>
+          addDialog({
+            headline: 'هشدار',
+            body: html`
+              <section-widget variant="paragraphs">
+                <typography-widget variant="text">آیا می‌خواهید خارج شوید؟</typography-widget>
+              </section-widget>
+            `,
+            button: { text: 'بله', action: () => history.back() },
+          }),
+      },
+      trailing: html`
+        <button-widget
+          variant="text"
+          icon="done"
+          @click=${this.#submitForm.bind(this)}
+        ></button-widget>
+      `,
+    });
+  }
+
+  override mountedCallback() {
+    super.mountedCallback();
+
+    this.#courseName = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="courseName"]')
+    );
+
+    this.#professorName = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="professorName"]')
+    );
+
+    this.#sessionStartTime = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="sessionStartTime"]')
+    );
+
+    this.#sessionEndTime = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="sessionEndTime"]')
+    );
+
+    this.#examDate = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="examDate"]')
+    );
+
+    this.#examStartTime = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="examStartTime"]')
+    );
+
+    this.#examEndTime = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="examEndTime"]')
+    );
+
+    this.#courseGroupNumber = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="courseGroupNumber"]')
+    );
+
+    this.#assistantName = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="assistantName"]')
+    );
+
+    this.#TASessionStartTime = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="TASessionStartTime"]')
+    );
+
+    this.#TASessionEndTime = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="TASessionEndTime"]')
+    );
+
+    this.#TAGroupNumber = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="TAGroupNumber"]')
+    );
+  }
+}

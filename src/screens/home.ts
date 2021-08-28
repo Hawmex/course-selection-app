@@ -1,4 +1,4 @@
-import { repeat } from 'lit-html/directives/repeat';
+import { repeat } from 'lit-html/directives/repeat.js';
 import 'nexinterface/dist/button/button.js';
 import { activateDrawer } from 'nexinterface/dist/drawer/drawer.js';
 import { Nexscreen } from 'nexinterface/dist/screen/screen.js';
@@ -6,7 +6,7 @@ import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar.js';
 import 'nexinterface/dist/typography/typography.js';
 import { html, WidgetAnimation, WidgetTemplate } from 'nexwidget';
 import '../components/course-card.js';
-import { Course, courses } from '../courses';
+import { Course, courses } from '../courses.js';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -20,21 +20,9 @@ export interface HomeScreen {
 }
 
 export class HomeScreen extends Nexscreen {
-  override addedCallback() {
-    super.addedCallback();
-    setTopBarOptions({
-      headline: 'خانه',
-      leading: { icon: 'menu', action: activateDrawer },
-      trailing: html`
-        <button-widget
-          variant="text"
-          icon="post_add"
-          @click=${() => history.pushState({}, document.title, '/add-course')}
-        ></button-widget>
-      `,
-    });
-
-    courses.runAndSubscribe((courses) => (this.courses = [...courses]));
+  static {
+    this.createReactives(['courses']);
+    this.registerAs('home-screen');
   }
 
   override get template(): WidgetTemplate {
@@ -55,7 +43,21 @@ export class HomeScreen extends Nexscreen {
   override get updateOrSlotChangeAnimation(): WidgetAnimation {
     return this.mountAnimation;
   }
-}
 
-HomeScreen.createReactives(['courses']);
-HomeScreen.registerAs('home-screen');
+  override addedCallback() {
+    super.addedCallback();
+    setTopBarOptions({
+      headline: 'خانه',
+      leading: { icon: 'menu', action: activateDrawer },
+      trailing: html`
+        <button-widget
+          variant="text"
+          icon="post_add"
+          @click=${() => history.pushState({}, document.title, '/add-course')}
+        ></button-widget>
+      `,
+    });
+
+    courses.runAndSubscribe((courses) => (this.courses = [...courses]));
+  }
+}

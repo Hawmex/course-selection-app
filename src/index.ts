@@ -9,9 +9,11 @@ declare global {
 }
 
 export class AppProvider extends Nexinterface {
+  static {
+    this.registerAs('app-provider');
+  }
+
   override get template(): WidgetTemplate {
     return html`<app-widget dir="rtl"></app-widget>`;
   }
 }
-
-AppProvider.registerAs('app-provider');

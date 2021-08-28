@@ -18,6 +18,10 @@ declare global {
 }
 
 export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
+  static {
+    this.registerAs('app-widget');
+  }
+  
   static override get styles(): CSSStyleSheet[] {
     return [
       ...super.styles,
@@ -29,11 +33,6 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
         }
       `,
     ];
-  }
-
-  override addedCallback() {
-    super.addedCallback();
-    setTopBarOptions({ active: false });
   }
 
   override get template(): WidgetTemplate {
@@ -68,6 +67,9 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
       <snackbar-widget></snackbar-widget>
     `;
   }
-}
 
-AppWidget.registerAs('app-widget');
+  override addedCallback() {
+    super.addedCallback();
+    setTopBarOptions({ active: false });
+  }
+}

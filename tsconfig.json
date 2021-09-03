@@ -5,7 +5,7 @@
     "module": "ESNext",
     "lib": ["ESNext", "DOM"],
     "declaration": true,
-    "outDir": "dist",
+    "outDir": "public/build",
     "rootDir": "src",
     "strict": true,
     "noUnusedLocals": true,

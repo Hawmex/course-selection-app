@@ -1,5 +1,5 @@
-import { Nexinterface } from 'nexinterface/dist/base/base.js';
-import { html, WidgetTemplate } from 'nexwidget';
+import { Nexinterface } from 'nexinterface/base/base.js';
+import { html, WidgetTemplate } from 'nexwidget/nexwidget.js';
 import './app.js';
 
 declare global {

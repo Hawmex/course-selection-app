@@ -1,11 +1,11 @@
-import { Nexinterface } from 'nexinterface/dist/base/base.js';
-import 'nexinterface/dist/button/button.js';
-import { addDialog } from 'nexinterface/dist/dialog/dialog.js';
-import 'nexinterface/dist/paper/paper.js';
-import 'nexinterface/dist/section/section.js';
-import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar.js';
-import 'nexinterface/dist/typography/typography.js';
-import { css, html, nothing, WidgetTemplate } from 'nexwidget';
+import { Nexinterface } from 'nexinterface/base/base.js';
+import 'nexinterface/button/button.js';
+import { addDialog } from 'nexinterface/dialog/dialog.js';
+import 'nexinterface/paper/paper.js';
+import 'nexinterface/section/section.js';
+import { addSnackbar } from 'nexinterface/snackbar/snackbar.js';
+import 'nexinterface/typography/typography.js';
+import { css, html, nothing, WidgetTemplate } from 'nexwidget/nexwidget.js';
 import { Course, courses, deleteCourse } from '../courses.js';
 
 declare global {

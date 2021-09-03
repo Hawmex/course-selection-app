@@ -4,16 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="#26a69a" />
+
     <title>اپ انتخاب واحد</title>
+
     <link rel="preload" href="/index.css" as="style" />
+
     <link
       rel="preload"
       href="https://unpkg.com/construct-style-sheets-polyfill"
       as="script"
       crossorigin
     />
+
     <link rel="preload" href="/build/index.js" as="script" crossorigin />
+
     <link rel="stylesheet" href="/index.css" media="all" />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "lit-html/": "https://unpkg.com/lit-html@1.4.1/",
+          "nexwidget/": "https://unpkg.com/nexwidget@5.1.8/dist/",
+          "nexinterface/": "https://unpkg.com/nexinterface@3.3.9/dist/",
+          "nexstate/": "https://unpkg.com/nexstate@5.1.8/dist/"
+        },
+        "scopes": {
+          "https://unpkg.com/nexwidget@5.1.8/": {
+            "lit-html/": "https://unpkg.com/lit-html@1.4.1/",
+            "nexbounce/": "https://unpkg.com/nexbounce@5.1.8/dist/"
+          },
+          "https://unpkg.com/nexinterface@3.3.9/": {
+            "nexbounce/": "https://unpkg.com/nexbounce@5.1.8/dist/",
+            "nexstate/": "https://unpkg.com/nexstate@5.1.8/dist/",
+            "nexwidget/": "https://unpkg.com/nexwidget@5.1.8/dist/"
+          },
+          "https://unpkg.com/nexstate@5.1.8/": {
+            "nexbounce/": "https://unpkg.com/nexbounce@5.1.8/dist/"
+          }
+        }
+      }
+    </script>
+
     <script type="module" src="https://unpkg.com/construct-style-sheets-polyfill"></script>
     <script type="module" src="/build/index.js"></script>
   </head>

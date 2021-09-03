@@ -1,4 +1,4 @@
-import { Nexstate } from 'nexstate';
+import { Nexstate } from 'nexstate/nexstate.js';
 
 export type Time = `${number}:${number}`;
 export type TimeRange = { from: Time; to: Time };

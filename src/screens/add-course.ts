@@ -1,17 +1,17 @@
 import { repeat } from 'lit-html/directives/repeat.js';
-import 'nexinterface/dist/button/button.js';
-import 'nexinterface/dist/chip/chip.js';
-import 'nexinterface/dist/chip/chips-container.js';
-import { addDialog, removeDialog } from 'nexinterface/dist/dialog/dialog.js';
-import 'nexinterface/dist/input/input.js';
-import { InputWidget } from 'nexinterface/dist/input/input.js';
-import 'nexinterface/dist/paper/paper.js';
-import { Nexscreen } from 'nexinterface/dist/screen/screen.js';
-import 'nexinterface/dist/section/section.js';
-import { addSnackbar } from 'nexinterface/dist/snackbar/snackbar.js';
-import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar.js';
-import 'nexinterface/dist/typography/typography.js';
-import { html, nothing, WidgetTemplate } from 'nexwidget';
+import 'nexinterface/button/button.js';
+import 'nexinterface/chip/chip.js';
+import 'nexinterface/chip/chips-container.js';
+import { addDialog, removeDialog } from 'nexinterface/dialog/dialog.js';
+import 'nexinterface/input/input.js';
+import { InputWidget } from 'nexinterface/input/input.js';
+import 'nexinterface/paper/paper.js';
+import { Nexscreen } from 'nexinterface/screen/screen.js';
+import 'nexinterface/section/section.js';
+import { addSnackbar } from 'nexinterface/snackbar/snackbar.js';
+import { setTopBarOptions } from 'nexinterface/top-bar/top-bar.js';
+import 'nexinterface/typography/typography.js';
+import { html, nothing, WidgetTemplate } from 'nexwidget/nexwidget.js';
 import { addCourse, Course, courses, Time, TimeRange } from '../courses.js';
 
 declare global {

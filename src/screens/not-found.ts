@@ -1,7 +1,7 @@
-import { Nexscreen } from 'nexinterface/dist/screen/screen.js';
-import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar.js';
-import 'nexinterface/dist/typography/typography.js';
-import { html, WidgetTemplate } from 'nexwidget';
+import { Nexscreen } from 'nexinterface/screen/screen.js';
+import { setTopBarOptions } from 'nexinterface/top-bar/top-bar.js';
+import 'nexinterface/typography/typography.js';
+import { html, WidgetTemplate } from 'nexwidget/nexwidget.js';
 
 declare global {
   interface HTMLElementTagNameMap {

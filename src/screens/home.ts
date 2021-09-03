@@ -1,10 +1,10 @@
 import { repeat } from 'lit-html/directives/repeat.js';
-import 'nexinterface/dist/button/button.js';
-import { activateDrawer } from 'nexinterface/dist/drawer/drawer.js';
-import { Nexscreen } from 'nexinterface/dist/screen/screen.js';
-import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar.js';
-import 'nexinterface/dist/typography/typography.js';
-import { html, WidgetAnimation, WidgetTemplate } from 'nexwidget';
+import 'nexinterface/button/button.js';
+import { activateDrawer } from 'nexinterface/drawer/drawer.js';
+import { Nexscreen } from 'nexinterface/screen/screen.js';
+import { setTopBarOptions } from 'nexinterface/top-bar/top-bar.js';
+import 'nexinterface/typography/typography.js';
+import { html, WidgetAnimation, WidgetTemplate } from 'nexwidget/nexwidget.js';
 import '../components/course-card.js';
 import { Course, courses } from '../courses.js';
 

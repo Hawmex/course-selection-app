@@ -1,14 +1,14 @@
-import { AppScaffold } from 'nexinterface/dist/app-scaffold/app-scaffold.js';
-import 'nexinterface/dist/button/button.js';
-import 'nexinterface/dist/dialog/dialog.js';
-import 'nexinterface/dist/drawer/drawer.js';
-import 'nexinterface/dist/router/route.js';
-import 'nexinterface/dist/router/router.js';
-import 'nexinterface/dist/snackbar/snackbar.js';
-import 'nexinterface/dist/top-bar/top-bar.js';
-import { setTopBarOptions } from 'nexinterface/dist/top-bar/top-bar.js';
-import { css, html, WidgetTemplate } from 'nexwidget';
-import { WithPendingTaskHandler } from 'nexwidget/dist/mixins/pending-task.js';
+import { AppScaffold } from 'nexinterface/app-scaffold/app-scaffold.js';
+import 'nexinterface/button/button.js';
+import 'nexinterface/dialog/dialog.js';
+import 'nexinterface/drawer/drawer.js';
+import 'nexinterface/router/route.js';
+import 'nexinterface/router/router.js';
+import 'nexinterface/snackbar/snackbar.js';
+import 'nexinterface/top-bar/top-bar.js';
+import { setTopBarOptions } from 'nexinterface/top-bar/top-bar.js';
+import { WithPendingTaskHandler } from 'nexwidget/mixins/pending-task.js';
+import { css, html, WidgetTemplate } from 'nexwidget/nexwidget.js';
 import './courses.js';
 
 declare global {

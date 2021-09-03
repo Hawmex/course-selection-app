@@ -22,10 +22,6 @@ npm run dev:server
 npm run dev:tsc
 ```
 
-```
-npm run dev:esbuild
-```
-
 ## Production
 
 ```

@@ -16,7 +16,7 @@ export class NotFoundScreen extends Nexscreen {
 
   override get template(): WidgetTemplate {
     return html`
-      <typography-widget style="justify-self: center;" variant="text">
+      <typography-widget style="text-align: center;" variant="text">
         صفحه‌ای که به دنبال آن می‌گشتید یافت نشد.
       </typography-widget>
     `;

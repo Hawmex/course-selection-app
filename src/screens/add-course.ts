@@ -580,16 +580,18 @@ export class AddCourseScreen extends Nexscreen {
 
           if (!hasErrors)
             addDialog({
-              headline: 'هشدار',
+              headline: 'توجه',
               body: html`
                 <section-widget variant="paragraphs">
                   <typography-widget variant="text"
-                    >آیا از درستی اطلاعات وارد شده مطمئنید؟</typography-widget
+                    >
+                    آیا از درستی اطلاعات وارد شده مطمئنید؟
+                    </typography-widget
                   >
                 </section-widget>
               `,
               button: {
-                text: 'بله',
+                text: 'اضافه کردن درس',
                 action: () => {
                   addCourse(course);
                   history.back();
@@ -616,7 +618,7 @@ export class AddCourseScreen extends Nexscreen {
                 <typography-widget variant="text">آیا می‌خواهید خارج شوید؟</typography-widget>
               </section-widget>
             `,
-            button: { text: 'بله', action: () => history.back() },
+            button: { text: 'خروج', action: () => history.back() },
           }),
       },
       trailing: html`

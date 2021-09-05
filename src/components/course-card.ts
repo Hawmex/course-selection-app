@@ -66,7 +66,7 @@ export class CourseCardComponent extends Nexinterface {
                   </section-widget>
                 `,
                 button: {
-                  text: 'حذف',
+                  text: 'حذف درس',
                   action: () => {
                     deleteCourse(this.#course!);
                     addSnackbar({ text: `درس ${this.#course?.courseName} حذف شد.` });

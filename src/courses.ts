@@ -2,21 +2,17 @@ import { Nexstate } from 'nexstate/nexstate.js';
 
 export type Time = `${number}:${number}`;
 export type TimeRange = { from: Time; to: Time };
+export type ExamDate = `${number}/${number}`;
+export type Sessions = { days: string[]; time: TimeRange };
+export type Exam = { date: ExamDate; time: TimeRange };
 
 export type Course = {
-  courseName: string;
-  professorName?: string;
-  sessionDays: string[];
-  sessionTime: TimeRange;
-  examDate?: `${number}/${number}`;
-  examTime?: TimeRange;
-  groupNumber?: number;
-  teachingAssistant?: {
-    assistantName?: string;
-    sessionDays: string[];
-    sessionTime: TimeRange;
-    groupNumber?: number;
-  };
+  name: string;
+  professor?: string;
+  sessions: Sessions;
+  exam?: Exam;
+  group?: number;
+  ta?: { name?: string; sessions: Sessions; group?: number };
 };
 
 const storedCourses = localStorage.getItem('courses');

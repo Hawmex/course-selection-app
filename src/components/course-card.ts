@@ -25,7 +25,7 @@ export class CourseCardComponent extends Nexinterface {
     this.createReactives(['courseName']);
     this.registerAs('course-card-component');
   }
-
+  
   static override get styles(): CSSStyleSheet[] {
     return [
       ...super.styles,
@@ -52,7 +52,7 @@ export class CourseCardComponent extends Nexinterface {
       <paper-widget>
         <section-widget variant="buttons">
           <typography-widget slot="leading" variant="top-bar">
-            ${this.#course?.courseName}
+            ${this.#course?.name}
           </typography-widget>
           <button-widget
             @click=${() =>
@@ -61,7 +61,7 @@ export class CourseCardComponent extends Nexinterface {
                 body: html`
                   <section-widget variant="paragraphs">
                     <typography-widget variant="text">
-                      آیا میخواهید درس ${this.#course?.courseName} را حذف کنید؟
+                      آیا میخواهید درس ${this.#course?.name} را حذف کنید؟
                     </typography-widget>
                   </section-widget>
                 `,
@@ -69,7 +69,7 @@ export class CourseCardComponent extends Nexinterface {
                   text: 'حذف درس',
                   action: () => {
                     deleteCourse(this.#course!);
-                    addSnackbar({ text: `درس ${this.#course?.courseName} حذف شد.` });
+                    addSnackbar({ text: `درس ${this.#course?.name} حذف شد.` });
                   },
                 },
               })}
@@ -82,66 +82,65 @@ export class CourseCardComponent extends Nexinterface {
           <typography-widget variant="text">
             نام استاد:
             <typography-widget variant="headline">
-              ${this.#course?.professorName ?? '-'}
+              ${this.#course?.professor ?? '-'}
             </typography-widget>
           </typography-widget>
           <typography-widget variant="text">
             گروه:
             <typography-widget variant="headline">
-              ${this.#course?.groupNumber ?? '-'}
+              ${this.#course?.group ?? '-'}
             </typography-widget>
           </typography-widget>
           <typography-widget variant="text">
             تاریخ امتحان:
             <typography-widget variant="headline">
-              ${this.#course?.examDate ?? '-'}
+              ${this.#course?.exam?.date ?? '-'}
             </typography-widget>
           </typography-widget>
           <typography-widget variant="text">
             ساعت امتحان:
             <typography-widget variant="headline">
-              ${this.#course?.examTime
-                ? `${this.#course.examTime.from}-${this.#course.examTime.to}`
+              ${this.#course?.exam?.time
+                ? `${this.#course.exam.time.from}-${this.#course.exam.time.to}`
                 : '-'}
             </typography-widget>
           </typography-widget>
           <typography-widget variant="text">
             روزهای جلسات:
             <typography-widget variant="headline">
-              ${this.#course?.sessionDays.join(', ')}
+              ${this.#course?.sessions.days.join(', ')}
             </typography-widget>
           </typography-widget>
           <typography-widget variant="text">
             ساعت جلسات:
             <typography-widget variant="headline">
-              ${this.#course?.sessionTime.from}-${this.#course?.sessionTime.to}
+              ${this.#course?.sessions.time.from}-${this.#course?.sessions.time.to}
             </typography-widget>
           </typography-widget>
-          ${this.#course?.teachingAssistant
+          ${this.#course?.ta
             ? html`
                 <typography-widget variant="text">
                   نام تدریس‌یار:
                   <typography-widget variant="headline">
-                    ${this.#course?.teachingAssistant.assistantName ?? '-'}
+                    ${this.#course?.ta.name ?? '-'}
                   </typography-widget>
                 </typography-widget>
                 <typography-widget variant="text">
                   گروه تدریس‌یار:
                   <typography-widget variant="headline">
-                    ${this.#course?.teachingAssistant.groupNumber ?? '-'}
+                    ${this.#course?.ta.group ?? '-'}
                   </typography-widget>
                 </typography-widget>
                 <typography-widget variant="text">
                   روزهای جلسات تدریس‌یار:
                   <typography-widget variant="headline">
-                    ${this.#course?.teachingAssistant.sessionDays.join(', ')}
+                    ${this.#course?.ta.sessions.days.join(', ')}
                   </typography-widget>
                 </typography-widget>
                 <typography-widget variant="text">
                   ساعت جلسات تدریس‌یار:
                   <typography-widget variant="headline">
-                    ${this.#course?.teachingAssistant.sessionTime.from} -
-                    ${this.#course?.teachingAssistant.sessionTime.to}
+                    ${this.#course?.ta.sessions.time.from} - ${this.#course?.ta.sessions.time.to}
                   </typography-widget>
                 </typography-widget>
               `
@@ -153,11 +152,11 @@ export class CourseCardComponent extends Nexinterface {
 
   override addedCallback() {
     super.addedCallback();
-    this.#course = [...courses.state].find(({ courseName }) => courseName === this.courseName);
+    this.#course = [...courses.state].find(({ name }) => name === this.courseName);
   }
 
   override updatedCallback() {
     super.updatedCallback();
-    this.#course = [...courses.state].find(({ courseName }) => courseName === this.courseName);
+    this.#course = [...courses.state].find(({ name }) => name === this.courseName);
   }
 }

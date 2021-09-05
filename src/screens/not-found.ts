@@ -13,7 +13,7 @@ export class NotFoundScreen extends Nexscreen {
   static {
     this.registerAs('not-found-screen');
   }
-
+  
   override get template(): WidgetTemplate {
     return html`
       <typography-widget style="text-align: center;" variant="text">

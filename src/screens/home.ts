@@ -24,14 +24,13 @@ export class HomeScreen extends Nexscreen {
     this.createReactives(['courses']);
     this.registerAs('home-screen');
   }
-
+  
   override get template(): WidgetTemplate {
     return this.courses!.length
       ? repeat(
           this.courses!,
-          ({ courseName }) => courseName,
-          ({ courseName }) =>
-            html`<course-card-component course-name=${courseName}></course-card-component>`,
+          ({ name }) => name,
+          ({ name }) => html`<course-card-component course-name=${name}></course-card-component>`,
         )
       : html`
           <typography-widget style="text-align: center;" variant="text">

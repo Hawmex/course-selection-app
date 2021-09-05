@@ -593,7 +593,7 @@ export class AddCourseScreen extends Nexscreen {
                 action: () => {
                   addCourse(course);
                   history.back();
-                  addSnackbar({ text: `درس ${course.courseName} اضافه شد.` });
+                  addSnackbar({ text: `درس ${course.courseName} افزوده شد.` });
                 },
               },
             });

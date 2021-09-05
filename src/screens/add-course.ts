@@ -583,15 +583,13 @@ export class AddCourseScreen extends Nexscreen {
               headline: 'توجه',
               body: html`
                 <section-widget variant="paragraphs">
-                  <typography-widget variant="text"
-                    >
-                    آیا از درستی اطلاعات وارد شده مطمئنید؟
-                    </typography-widget
-                  >
+                  <typography-widget variant="text">
+                    آیا از درستی اطلاعات وارد شده مطمئنید؟        
+                  </typography-widget>
                 </section-widget>
               `,
               button: {
-                text: 'اضافه کردن درس',
+                text: 'تایید اطلاعات',
                 action: () => {
                   addCourse(course);
                   history.back();

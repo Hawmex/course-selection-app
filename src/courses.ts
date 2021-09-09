@@ -1,9 +1,18 @@
 import { Nexstate } from 'nexstate/nexstate.js';
 
+export type SessionDay =
+  | 'جمعه'
+  | 'پنج‌شنبه'
+  | 'چهارشنبه'
+  | 'سه‌شنبه'
+  | 'دوشنبه'
+  | 'یک‌شنبه'
+  | 'شنبه';
+
 export type Time = `${number}:${number}`;
 export type TimeRange = { from: Time; to: Time };
 export type ExamDate = `${number}/${number}`;
-export type Sessions = { days: string[]; time: TimeRange };
+export type Sessions = { days: SessionDay[]; time: TimeRange };
 export type Exam = { date: ExamDate; time: TimeRange };
 
 export type Course = {

@@ -12,7 +12,7 @@ import { addSnackbar } from 'nexinterface/snackbar/snackbar.js';
 import { setTopBarOptions } from 'nexinterface/top-bar/top-bar.js';
 import 'nexinterface/typography/typography.js';
 import { html, nothing, WidgetTemplate } from 'nexwidget/nexwidget.js';
-import { addCourse, Course, courses, ExamDate, Time } from '../courses.js';
+import { addCourse, Course, courses, ExamDate, SessionDay, Time } from '../courses.js';
 import { checkIfSessionsInterfere, checkIfTimeIsWrong, checkIfTimesInterfere } from '../utils.js';
 
 declare global {
@@ -22,11 +22,11 @@ declare global {
 }
 
 export interface AddCourseScreen {
-  get courseSessionDays(): string[] | undefined;
-  set courseSessionDays(v: string[] | undefined);
+  get courseSessionDays(): SessionDay[] | undefined;
+  set courseSessionDays(v: SessionDay[] | undefined);
 
-  get taSessionDays(): string[] | undefined;
-  set taSessionDays(v: string[] | undefined);
+  get taSessionDays(): SessionDay[] | undefined;
+  set taSessionDays(v: SessionDay[] | undefined);
 }
 
 export class AddCourseScreen extends Nexscreen {
@@ -35,7 +35,7 @@ export class AddCourseScreen extends Nexscreen {
     this.registerAs('add-course-screen');
   }
   
-  #days = ['شنبه', 'یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه'];
+  #days = <const>['شنبه', 'یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه'];
 
   #courseName?: InputWidget;
   #professorName?: InputWidget;
@@ -205,19 +205,19 @@ export class AddCourseScreen extends Nexscreen {
     `;
   }
 
-  #deleteCourseSessionDay(day: string) {
+  #deleteCourseSessionDay(day: SessionDay) {
     this.courseSessionDays = this.courseSessionDays!.filter((d) => d !== day);
   }
 
-  #addCourseSessionDay(day: string) {
+  #addCourseSessionDay(day: SessionDay) {
     this.courseSessionDays = [...(this.courseSessionDays ?? []), day];
   }
 
-  #deleteTASessionDay(day: string) {
+  #deleteTASessionDay(day: SessionDay) {
     this.taSessionDays = this.taSessionDays!.filter((d) => d !== day);
   }
 
-  #addTASessionDay(day: string) {
+  #addTASessionDay(day: SessionDay) {
     this.taSessionDays = [...(this.taSessionDays ?? []), day];
   }
 

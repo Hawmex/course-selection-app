@@ -4,7 +4,7 @@
   "description": "An App for making plans for university course selection.",
   "private": true,
   "scripts": {
-    "prod": "npx tsc",
+    "prod": "npx tsc && npx prettier public/build/**/*.{js,d.ts} --write",
     "dev:server": "cd public && npx live-server --entry-file=index.html",
     "dev:tsc": "npx tsc --watch"
   },

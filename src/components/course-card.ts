@@ -25,7 +25,7 @@ export class CourseCardComponent extends Nexinterface {
     this.createReactives(['courseName']);
     this.registerAs('course-card-component');
   }
-  
+
   static override get styles(): CSSStyleSheet[] {
     return [
       ...super.styles,

@@ -21,7 +21,7 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
   static {
     this.registerAs('app-widget');
   }
-  
+
   static override get styles(): CSSStyleSheet[] {
     return [
       ...super.styles,

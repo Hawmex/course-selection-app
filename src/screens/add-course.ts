@@ -34,7 +34,7 @@ export class AddCourseScreen extends Nexscreen {
     this.createReactives(['taSessionDays', 'courseSessionDays']);
     this.registerAs('add-course-screen');
   }
-  
+
   #days = <const>['شنبه', 'یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه'];
 
   #courseName?: InputWidget;

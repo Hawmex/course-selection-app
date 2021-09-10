@@ -24,7 +24,7 @@ export class HomeScreen extends Nexscreen {
     this.createReactives(['courses']);
     this.registerAs('home-screen');
   }
-  
+
   override get template(): WidgetTemplate {
     return this.courses!.length
       ? repeat(

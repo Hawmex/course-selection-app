@@ -1,8 +1,8 @@
 import { repeat } from 'lit-html/directives/repeat.js';
+import { setAppBarOptions } from 'nexinterface/app-bar/app-bar.js';
 import 'nexinterface/button/button.js';
 import { activateDrawer } from 'nexinterface/drawer/drawer.js';
 import { Nexscreen } from 'nexinterface/screen/screen.js';
-import { setTopBarOptions } from 'nexinterface/top-bar/top-bar.js';
 import 'nexinterface/typography/typography.js';
 import { html, WidgetAnimation, WidgetTemplate } from 'nexwidget/nexwidget.js';
 import '../components/course-card.js';
@@ -45,7 +45,7 @@ export class HomeScreen extends Nexscreen {
 
   override addedCallback() {
     super.addedCallback();
-    setTopBarOptions({
+    setAppBarOptions({
       headline: 'خانه',
       leading: { icon: 'menu', action: activateDrawer },
       trailing: html`

@@ -1,4 +1,5 @@
 import { repeat } from 'lit-html/directives/repeat.js';
+import { setAppBarOptions } from 'nexinterface/app-bar/app-bar.js';
 import 'nexinterface/button/button.js';
 import 'nexinterface/chip/chip.js';
 import 'nexinterface/chip/chips-container.js';
@@ -9,7 +10,6 @@ import 'nexinterface/paper/paper.js';
 import { Nexscreen } from 'nexinterface/screen/screen.js';
 import 'nexinterface/section/section.js';
 import { addSnackbar } from 'nexinterface/snackbar/snackbar.js';
-import { setTopBarOptions } from 'nexinterface/top-bar/top-bar.js';
 import 'nexinterface/typography/typography.js';
 import { html, nothing, WidgetTemplate } from 'nexwidget/nexwidget.js';
 import { addCourse, Course, courses, ExamDate, SessionDay, Time } from '../courses.js';
@@ -55,34 +55,38 @@ export class AddCourseScreen extends Nexscreen {
       <paper-widget full-width>
         <section-widget variant="inputs">
           <typography-widget variant="headline">درس</typography-widget>
-          <input-widget data-key="courseName" type="text" label="نام درس*"></input-widget>
-          <input-widget data-key="professorName" type="text" label="نام استاد"></input-widget>
+          <input-widget data-key="courseName" variant="text" label="نام درس*"></input-widget>
+          <input-widget data-key="professorName" variant="text" label="نام استاد"></input-widget>
           <input-widget
             data-key="courseGroup"
-            type="number"
+            variant="number"
             label="گروه"
             placeholder="نمونه: 12"
           ></input-widget>
           <input-widget
             data-key="examDate"
-            type="text"
+            variant="text"
             label="تاریخ امتحان"
             placeholder="نمونه: 10/28"
           ></input-widget>
           <input-widget
             data-key="examStartTime"
-            type="time"
+            variant="time"
             label="ساعت شروع امتحان"
           ></input-widget>
-          <input-widget data-key="examEndTime" type="time" label="ساعت پایان امتحان"></input-widget>
+          <input-widget
+            data-key="examEndTime"
+            variant="time"
+            label="ساعت پایان امتحان"
+          ></input-widget>
           <input-widget
             data-key="sessionStartTime"
-            type="time"
+            variant="time"
             label="ساعت شروع جلسه*"
           ></input-widget>
           <input-widget
             data-key="sessionEndTime"
-            type="time"
+            variant="time"
             label="ساعت پایان جلسه*"
           ></input-widget>
           ${this.courseSessionDays?.length
@@ -139,16 +143,16 @@ export class AddCourseScreen extends Nexscreen {
       <paper-widget full-width>
         <section-widget variant="inputs">
           <typography-widget variant="headline">تدریس‌یار</typography-widget>
-          <input-widget data-key="taName" type="text" label="نام استاد"></input-widget>
-          <input-widget data-key="taGroup" type="number" label="گروه"></input-widget>
+          <input-widget data-key="taName" variant="text" label="نام استاد"></input-widget>
+          <input-widget data-key="taGroup" variant="number" label="گروه"></input-widget>
           <input-widget
             data-key="taSessionStartTime"
-            type="time"
+            variant="time"
             label="ساعت شروع جلسه"
           ></input-widget>
           <input-widget
             data-key="taSessionEndTime"
-            type="time"
+            variant="time"
             label="ساعت پایان جلسه"
           ></input-widget>
           ${this.taSessionDays?.length
@@ -521,7 +525,7 @@ export class AddCourseScreen extends Nexscreen {
 
   override addedCallback() {
     super.addedCallback();
-    setTopBarOptions({
+    setAppBarOptions({
       headline: 'افزودن درس',
       leading: {
         icon: 'arrow_forward',

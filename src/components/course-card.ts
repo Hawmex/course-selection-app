@@ -51,7 +51,7 @@ export class CourseCardComponent extends Nexinterface {
     return html`
       <paper-widget>
         <section-widget variant="buttons">
-          <typography-widget slot="leading" variant="top-bar">
+          <typography-widget slot="leading" variant="app-bar">
             ${this.#course?.name}
           </typography-widget>
           <button-widget

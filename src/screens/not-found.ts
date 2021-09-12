@@ -1,5 +1,5 @@
+import { setAppBarOptions } from 'nexinterface/app-bar/app-bar.js';
 import { Nexscreen } from 'nexinterface/screen/screen.js';
-import { setTopBarOptions } from 'nexinterface/top-bar/top-bar.js';
 import 'nexinterface/typography/typography.js';
 import { html, WidgetTemplate } from 'nexwidget/nexwidget.js';
 
@@ -24,6 +24,6 @@ export class NotFoundScreen extends Nexscreen {
 
   override addedCallback() {
     super.addedCallback();
-    setTopBarOptions({ headline: 'یافت نشد' });
+    setAppBarOptions({ headline: 'یافت نشد' });
   }
 }

@@ -1,3 +1,5 @@
+import 'nexinterface/app-bar/app-bar.js';
+import { setAppBarOptions } from 'nexinterface/app-bar/app-bar.js';
 import { AppScaffold } from 'nexinterface/app-scaffold/app-scaffold.js';
 import 'nexinterface/button/button.js';
 import 'nexinterface/dialog/dialog.js';
@@ -5,8 +7,6 @@ import 'nexinterface/drawer/drawer.js';
 import 'nexinterface/router/route.js';
 import 'nexinterface/router/router.js';
 import 'nexinterface/snackbar/snackbar.js';
-import 'nexinterface/top-bar/top-bar.js';
-import { setTopBarOptions } from 'nexinterface/top-bar/top-bar.js';
 import { WithPendingTaskHandler } from 'nexwidget/mixins/pending-task.js';
 import { css, html, WidgetTemplate } from 'nexwidget/nexwidget.js';
 import './courses.js';
@@ -27,7 +27,7 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
       ...super.styles,
       css`
         :host {
-          grid-template-rows: max-content 0px 1fr 0px 0px;
+          grid-template-rows: 1fr max-content 0px 0px 0px;
           --primaryColor: #29b6f6;
         }
       `,
@@ -36,15 +36,6 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
 
   override get template(): WidgetTemplate {
     return html`
-      <top-bar-widget ?loading=${this.hasPendingTask} app-name="اپ انتخاب واحد"></top-bar-widget>
-      <drawer-widget headline="اپ انتخاب واحد" text="نسخه 1.2.0">
-        <button-widget
-          link="/add-course"
-          variant="menu"
-          icon="post_add"
-          text="افزودن درس"
-        ></button-widget>
-      </drawer-widget>
       <router-widget>
         <route-widget
           path="/"
@@ -62,6 +53,19 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
           .src=${() => import('./screens/not-found.js')}
         ></route-widget>
       </router-widget>
+      <app-bar-widget
+        variant="bottom"
+        ?loading=${this.hasPendingTask}
+        app-name="اپ انتخاب واحد"
+      ></app-bar-widget>
+      <drawer-widget variant="bottom" headline="اپ انتخاب واحد" text="نسخه 1.2.0">
+        <button-widget
+          link="/add-course"
+          variant="menu"
+          icon="post_add"
+          text="افزودن درس"
+        ></button-widget>
+      </drawer-widget>
       <dialog-widget></dialog-widget>
       <snackbar-widget></snackbar-widget>
     `;
@@ -69,6 +73,6 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
 
   override addedCallback() {
     super.addedCallback();
-    setTopBarOptions({ active: false });
+    setAppBarOptions({ active: false });
   }
 }

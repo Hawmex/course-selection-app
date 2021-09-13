@@ -52,7 +52,7 @@ export class AddCourseScreen extends Nexscreen {
 
   override get template(): WidgetTemplate {
     return html`
-      <paper-widget full-width>
+      <paper-widget>
         <section-widget variant="inputs">
           <typography-widget variant="headline">درس</typography-widget>
           <input-widget data-key="courseName" variant="text" label="نام درس*"></input-widget>
@@ -140,7 +140,7 @@ export class AddCourseScreen extends Nexscreen {
           ></button-widget>
         </section-widget>
       </paper-widget>
-      <paper-widget full-width>
+      <paper-widget>
         <section-widget variant="inputs">
           <typography-widget variant="headline">تدریس‌یار</typography-widget>
           <input-widget data-key="taName" variant="text" label="نام استاد"></input-widget>

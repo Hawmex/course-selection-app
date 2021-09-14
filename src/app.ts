@@ -4,6 +4,7 @@ import { AppScaffold } from 'nexinterface/app-scaffold/app-scaffold.js';
 import 'nexinterface/button/button.js';
 import 'nexinterface/dialog/dialog.js';
 import 'nexinterface/drawer/drawer.js';
+import 'nexinterface/menu/menu.js';
 import 'nexinterface/router/route.js';
 import 'nexinterface/router/router.js';
 import 'nexinterface/snackbar/snackbar.js';
@@ -27,7 +28,7 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
       ...super.styles,
       css`
         :host {
-          grid-template-rows: 1fr max-content 0px 0px 0px;
+          grid-template-rows: 1fr max-content 0px 0px 0px 0px;
           --primaryColor: #29b6f6;
         }
       `,
@@ -66,6 +67,7 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
           text="افزودن درس"
         ></button-widget>
       </drawer-widget>
+      <menu-widget></menu-widget>
       <dialog-widget></dialog-widget>
       <snackbar-widget></snackbar-widget>
     `;

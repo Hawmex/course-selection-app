@@ -1,6 +1,7 @@
 import { Nexinterface } from 'nexinterface/base/base.js';
 import 'nexinterface/button/button.js';
 import { addDialog } from 'nexinterface/dialog/dialog.js';
+import { setMenuBody } from 'nexinterface/menu/menu.js';
 import 'nexinterface/paper/paper.js';
 import 'nexinterface/section/section.js';
 import { addSnackbar } from 'nexinterface/snackbar/snackbar.js';
@@ -56,26 +57,34 @@ export class CourseCardComponent extends Nexinterface {
           </typography-widget>
           <button-widget
             @click=${() =>
-              addDialog({
-                headline: 'هشدار',
-                body: html`
-                  <section-widget variant="paragraphs">
-                    <typography-widget variant="text">
-                      آیا میخواهید درس ${this.#course?.name} را حذف کنید؟
-                    </typography-widget>
-                  </section-widget>
-                `,
-                button: {
-                  text: 'حذف درس',
-                  action: () => {
-                    deleteCourse(this.#course!);
-                    addSnackbar({ text: `درس ${this.#course?.name} حذف شد.` });
-                  },
-                },
-              })}
+              setMenuBody(html`
+                <button-widget
+                  variant="menu"
+                  text="حذف درس"
+                  icon="delete"
+                  @click=${() =>
+                    addDialog({
+                      headline: 'هشدار',
+                      body: html`
+                        <section-widget variant="paragraphs">
+                          <typography-widget variant="text">
+                            آیا میخواهید درس ${this.#course?.name} را حذف کنید؟
+                          </typography-widget>
+                        </section-widget>
+                      `,
+                      button: {
+                        text: 'حذف درس',
+                        action: () => {
+                          deleteCourse(this.#course!);
+                          addSnackbar({ text: `درس ${this.#course?.name} حذف شد.` });
+                        },
+                      },
+                    })}
+                ></button-widget>
+              `)}
             slot="trailing"
             variant="text"
-            icon="delete"
+            icon="more_vert"
           ></button-widget>
         </section-widget>
         <section-widget variant="paragraphs">

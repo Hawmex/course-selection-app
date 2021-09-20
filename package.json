@@ -20,13 +20,13 @@
   },
   "homepage": "https://github.com/Hawmex/course-selection-app#readme",
   "devDependencies": {
-    "prettier": "^2.4.0",
+    "prettier": "^2.4.1",
     "typescript": "^4.4.3"
   },
   "dependencies": {
     "lit-html": "^1.4.1",
-    "nexinterface": "^5.1.7",
-    "nexstate": "^6.0.6",
-    "nexwidget": "^6.0.6"
+    "nexinterface": "^5.1.8",
+    "nexstate": "^6.0.7",
+    "nexwidget": "^6.0.7"
   }
 }

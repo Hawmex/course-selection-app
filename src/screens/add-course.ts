@@ -120,7 +120,7 @@ export class AddCourseScreen extends Nexscreen {
                 body: html`
                   <chips-container-widget class="body" style="padding: 8px;">
                     ${repeat(
-                      this.#days.filter((day) => !this.courseSessionDays?.includes?.(day)),
+                      this.#days.filter((day) => !this.courseSessionDays?.includes(day)),
                       (day) => day,
                       (day) =>
                         html`
@@ -186,7 +186,7 @@ export class AddCourseScreen extends Nexscreen {
                 body: html`
                   <chips-container-widget class="body" style="padding: 8px;">
                     ${repeat(
-                      this.#days.filter((day) => !this.taSessionDays?.includes?.(day)),
+                      this.#days.filter((day) => !this.taSessionDays?.includes(day)),
                       (day) => day,
                       (day) =>
                         html`

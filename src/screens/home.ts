@@ -26,17 +26,12 @@ export class HomeScreen extends Nexscreen {
   }
 
   override get template(): WidgetTemplate {
-    return this.courses!.length
-      ? repeat(
+    return this.courses!.length ? <WidgetTemplate>repeat(
           this.courses!,
           ({ name }) => name,
           ({ name }) => html`<course-card-component course-name=${name}></course-card-component>`,
-        )
-      : html`
-          <typography-widget style="text-align: center;" variant="text">
-            درسی ندارید. اضافه کنید!
-          </typography-widget>
-        `;
+        ) : html` <typography-widget style="text-align: center;" variant="text"> درسی ندارید. اضافه
+            کنید! </typography-widget> `;
   }
 
   override get updateOrSlotChangeAnimation(): WidgetAnimation {

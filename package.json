@@ -27,6 +27,6 @@
     "lit-html": "^2.0.0",
     "nexinterface": "^5.1.16",
     "nexstate": "^6.0.8",
-    "nexwidget": "^6.0.10"
+    "nexwidget": "^7.0.1"
   }
 }

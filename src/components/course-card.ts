@@ -1,13 +1,13 @@
 import { Nexinterface } from 'nexinterface/base/base.js';
 import 'nexinterface/button/button.js';
-import { addDialog } from 'nexinterface/dialog/dialog.js';
-import { setMenuBody } from 'nexinterface/menu/menu.js';
+import { dialogStore } from 'nexinterface/dialog/dialog.js';
+import { menuStore } from 'nexinterface/menu/menu.js';
 import 'nexinterface/paper/paper.js';
 import 'nexinterface/section/section.js';
-import { addSnackbar } from 'nexinterface/snackbar/snackbar.js';
+import { snackbarStore } from 'nexinterface/snackbar/snackbar.js';
 import 'nexinterface/typography/typography.js';
 import { css, html, nothing, WidgetTemplate } from 'nexwidget/nexwidget.js';
-import { Course, courses, deleteCourse } from '../courses.js';
+import { Course, coursesStore } from '../courses.js';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -57,13 +57,13 @@ export class CourseCardComponent extends Nexinterface {
           </typography-widget>
           <button-widget
             @click=${() =>
-              setMenuBody(html`
+              menuStore.setBody(html`
                 <button-widget
                   variant="menu"
                   text="حذف درس"
                   icon="delete"
                   @click=${() =>
-                    addDialog({
+                    dialogStore.pushQueue({
                       headline: 'هشدار',
                       body: html`
                         <section-widget variant="paragraphs">
@@ -75,8 +75,10 @@ export class CourseCardComponent extends Nexinterface {
                       button: {
                         text: 'حذف درس',
                         action: () => {
-                          deleteCourse(this.#course!);
-                          addSnackbar({ text: `درس ${this.#course?.name} حذف شد.` });
+                          coursesStore.deleteCourse(this.#course!);
+                          snackbarStore.pushQueue({
+                            text: `درس ${this.#course?.name} حذف شد.`,
+                          });
                         },
                       },
                     })}
@@ -123,7 +125,8 @@ export class CourseCardComponent extends Nexinterface {
           <typography-widget variant="text">
             ساعت جلسات:
             <typography-widget variant="headline">
-              ${this.#course?.sessions.time.from}-${this.#course?.sessions.time.to}
+              ${this.#course?.sessions.time.from}-${this.#course?.sessions.time
+                .to}
             </typography-widget>
           </typography-widget>
           ${this.#course?.ta
@@ -149,7 +152,8 @@ export class CourseCardComponent extends Nexinterface {
                 <typography-widget variant="text">
                   ساعت جلسات تدریس‌یار:
                   <typography-widget variant="headline">
-                    ${this.#course?.ta.sessions.time.from} - ${this.#course?.ta.sessions.time.to}
+                    ${this.#course?.ta.sessions.time.from} -
+                    ${this.#course?.ta.sessions.time.to}
                   </typography-widget>
                 </typography-widget>
               `
@@ -161,11 +165,15 @@ export class CourseCardComponent extends Nexinterface {
 
   override addedCallback() {
     super.addedCallback();
-    this.#course = [...courses.state].find(({ name }) => name === this.courseName);
+    this.#course = [...coursesStore.courses].find(
+      ({ name }) => name === this.courseName,
+    );
   }
 
   override updatedCallback() {
     super.updatedCallback();
-    this.#course = [...courses.state].find(({ name }) => name === this.courseName);
+    this.#course = [...coursesStore.courses].find(
+      ({ name }) => name === this.courseName,
+    );
   }
 }

@@ -1,5 +1,5 @@
 import 'nexinterface/app-bar/app-bar.js';
-import { setAppBarOptions } from 'nexinterface/app-bar/app-bar.js';
+import { appBarStore } from 'nexinterface/app-bar/app-bar.js';
 import { AppScaffold } from 'nexinterface/app-scaffold/app-scaffold.js';
 import 'nexinterface/button/button.js';
 import 'nexinterface/dialog/dialog.js';
@@ -59,7 +59,11 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
         ?loading=${this.hasPendingTask}
         app-name="اپ انتخاب واحد"
       ></app-bar-widget>
-      <drawer-widget variant="bottom" headline="اپ انتخاب واحد" text="نسخه 2.2.0">
+      <drawer-widget
+        variant="bottom"
+        headline="اپ انتخاب واحد"
+        text="نسخه 2.2.0"
+      >
         <button-widget
           link="/add-course"
           variant="menu"
@@ -75,6 +79,6 @@ export class AppWidget extends WithPendingTaskHandler(AppScaffold) {
 
   override addedCallback() {
     super.addedCallback();
-    setAppBarOptions({ active: false });
+    appBarStore.setOptions({ active: false });
   }
 }

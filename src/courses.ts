@@ -1,4 +1,4 @@
-import { Nexstate } from 'nexstate/nexstate.js';
+import { Store } from 'nexstate/nexstate.js';
 
 export type SessionDay =
   | 'جمعه'
@@ -24,23 +24,31 @@ export type Course = {
   ta?: { name?: string; sessions: Sessions; group?: number };
 };
 
-const storedCourses = localStorage.getItem('courses');
+export class CoursesStore extends Store {
+  courses: Set<Course>;
 
-const defaultState =
-  storedCourses !== null ? new Set<Course>([...JSON.parse(storedCourses)]) : new Set<Course>();
+  constructor() {
+    super();
 
-export const courses = new Nexstate<Set<Course>>(defaultState);
+    const storedCourses = localStorage.getItem('courses');
 
-courses.runAndSubscribe((courses) => localStorage.setItem('courses', JSON.stringify([...courses])));
+    this.courses =
+      storedCourses !== null
+        ? new Set<Course>([...JSON.parse(storedCourses)])
+        : new Set<Course>();
+  }
 
-export const addCourse = (course: Course) =>
-  courses.setState((courses) => {
-    courses.add(course);
-    return new Set([...courses]);
-  });
+  addCourse(course: Course) {
+    this.setState(() => this.courses.add(course));
+  }
 
-export const deleteCourse = (course: Course) =>
-  courses.setState((courses) => {
-    courses.delete(course);
-    return new Set([...courses]);
-  });
+  deleteCourse(course: Course) {
+    this.setState(() => this.courses.delete(course));
+  }
+}
+
+export const coursesStore = new CoursesStore();
+
+coursesStore.runAndSubscribe(() =>
+  localStorage.setItem('courses', JSON.stringify([...coursesStore.courses])),
+);

@@ -1,12 +1,12 @@
 import { repeat } from 'lit-html/directives/repeat.js';
-import { setAppBarOptions } from 'nexinterface/app-bar/app-bar.js';
+import { appBarStore } from 'nexinterface/app-bar/app-bar.js';
 import 'nexinterface/button/button.js';
-import { activateDrawer } from 'nexinterface/drawer/drawer.js';
+import { drawerStore } from 'nexinterface/drawer/drawer.js';
 import { Nexscreen } from 'nexinterface/screen/screen.js';
 import 'nexinterface/typography/typography.js';
 import { html, WidgetAnimation, WidgetTemplate } from 'nexwidget/nexwidget.js';
 import '../components/course-card.js';
-import { Course, courses } from '../courses.js';
+import { Course, coursesStore } from '../courses.js';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -29,9 +29,12 @@ export class HomeScreen extends Nexscreen {
     return this.courses!.length ? <WidgetTemplate>repeat(
           this.courses!,
           ({ name }) => name,
-          ({ name }) => html`<course-card-component course-name=${name}></course-card-component>`,
-        ) : html` <typography-widget style="text-align: center;" variant="text"> درسی ندارید. اضافه
-            کنید! </typography-widget> `;
+          ({ name }) =>
+            html`<course-card-component
+              course-name=${name}
+            ></course-card-component>`,
+        ) : html` <typography-widget style="text-align: center;" variant="text"> درسی
+            ندارید. اضافه کنید! </typography-widget> `;
   }
 
   override get updateOrSlotChangeAnimation(): WidgetAnimation {
@@ -40,9 +43,9 @@ export class HomeScreen extends Nexscreen {
 
   override addedCallback() {
     super.addedCallback();
-    setAppBarOptions({
+    appBarStore.setOptions({
       headline: 'خانه',
-      leading: { icon: 'menu', action: activateDrawer },
+      leading: { icon: 'menu', action: () => drawerStore.activate() },
       trailing: html`
         <button-widget
           variant="text"
@@ -52,6 +55,8 @@ export class HomeScreen extends Nexscreen {
       `,
     });
 
-    courses.runAndSubscribe((courses) => (this.courses = [...courses]));
+    coursesStore.runAndSubscribe(
+      () => (this.courses = [...coursesStore.courses]),
+    );
   }
 }

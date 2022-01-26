@@ -1,19 +1,29 @@
 import { repeat } from 'lit-html/directives/repeat.js';
-import { setAppBarOptions } from 'nexinterface/app-bar/app-bar.js';
+import { appBarStore } from 'nexinterface/app-bar/app-bar.js';
 import 'nexinterface/button/button.js';
 import 'nexinterface/chip/chip.js';
 import 'nexinterface/chip/chips-container.js';
-import { addDialog, removeDialog } from 'nexinterface/dialog/dialog.js';
+import { dialogStore } from 'nexinterface/dialog/dialog.js';
 import 'nexinterface/input/input.js';
 import { InputWidget } from 'nexinterface/input/input.js';
 import 'nexinterface/paper/paper.js';
 import { Nexscreen } from 'nexinterface/screen/screen.js';
 import 'nexinterface/section/section.js';
-import { addSnackbar } from 'nexinterface/snackbar/snackbar.js';
+import { snackbarStore } from 'nexinterface/snackbar/snackbar.js';
 import 'nexinterface/typography/typography.js';
 import { html, nothing, WidgetTemplate } from 'nexwidget/nexwidget.js';
-import { addCourse, Course, courses, ExamDate, SessionDay, Time } from '../courses.js';
-import { checkIfSessionsInterfere, checkIfTimeIsWrong, checkIfTimesInterfere } from '../utils.js';
+import {
+  Course,
+  coursesStore,
+  ExamDate,
+  SessionDay,
+  Time,
+} from '../courses.js';
+import {
+  checkIfSessionsInterfere,
+  checkIfTimeIsWrong,
+  checkIfTimesInterfere,
+} from '../utils.js';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -35,7 +45,15 @@ export class AddCourseScreen extends Nexscreen {
     this.registerAs('add-course-screen');
   }
 
-  #days = <const>['شنبه', 'یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه'];
+  #days = <const>[
+    'شنبه',
+    'یک‌شنبه',
+    'دوشنبه',
+    'سه‌شنبه',
+    'چهارشنبه',
+    'پنج‌شنبه',
+    'جمعه',
+  ];
 
   #courseName?: InputWidget;
   #professorName?: InputWidget;
@@ -55,8 +73,16 @@ export class AddCourseScreen extends Nexscreen {
       <paper-widget>
         <section-widget variant="inputs">
           <typography-widget variant="headline">درس</typography-widget>
-          <input-widget data-key="courseName" variant="text" label="نام درس*"></input-widget>
-          <input-widget data-key="professorName" variant="text" label="نام استاد"></input-widget>
+          <input-widget
+            data-key="courseName"
+            variant="text"
+            label="نام درس*"
+          ></input-widget>
+          <input-widget
+            data-key="professorName"
+            variant="text"
+            label="نام استاد"
+          ></input-widget>
           <input-widget
             data-key="courseGroup"
             variant="number"
@@ -115,12 +141,14 @@ export class AddCourseScreen extends Nexscreen {
             text="افزودن روز"
             icon="today"
             @click=${() =>
-              addDialog({
+              dialogStore.pushQueue({
                 headline: 'افزودن روز',
                 body: html`
                   <chips-container-widget class="body" style="padding: 8px;">
                     ${repeat(
-                      this.#days.filter((day) => !this.courseSessionDays?.includes(day)),
+                      this.#days.filter(
+                        (day) => !this.courseSessionDays?.includes(day),
+                      ),
                       (day) => day,
                       (day) =>
                         html`
@@ -129,7 +157,7 @@ export class AddCourseScreen extends Nexscreen {
                             text=${day}
                             @click=${() => {
                               this.#addCourseSessionDay(day);
-                              removeDialog();
+                              dialogStore.shiftQueue();
                             }}
                           ></chip-widget>
                         `,
@@ -143,8 +171,16 @@ export class AddCourseScreen extends Nexscreen {
       <paper-widget>
         <section-widget variant="inputs">
           <typography-widget variant="headline">تدریس‌یار</typography-widget>
-          <input-widget data-key="taName" variant="text" label="نام استاد"></input-widget>
-          <input-widget data-key="taGroup" variant="number" label="گروه"></input-widget>
+          <input-widget
+            data-key="taName"
+            variant="text"
+            label="نام استاد"
+          ></input-widget>
+          <input-widget
+            data-key="taGroup"
+            variant="number"
+            label="گروه"
+          ></input-widget>
           <input-widget
             data-key="taSessionStartTime"
             variant="time"
@@ -181,12 +217,14 @@ export class AddCourseScreen extends Nexscreen {
             text="افزودن روز"
             icon="today"
             @click=${() =>
-              addDialog({
+              dialogStore.pushQueue({
                 headline: 'افزودن روز',
                 body: html`
                   <chips-container-widget class="body" style="padding: 8px;">
                     ${repeat(
-                      this.#days.filter((day) => !this.taSessionDays?.includes(day)),
+                      this.#days.filter(
+                        (day) => !this.taSessionDays?.includes(day),
+                      ),
                       (day) => day,
                       (day) =>
                         html`
@@ -195,7 +233,7 @@ export class AddCourseScreen extends Nexscreen {
                             text=${day}
                             @click=${() => {
                               this.#addTASessionDay(day);
-                              removeDialog();
+                              dialogStore.shiftQueue();
                             }}
                           ></chip-widget>
                         `,
@@ -232,7 +270,11 @@ export class AddCourseScreen extends Nexscreen {
       return false;
     }
 
-    if (this.#examDate!.value! || this.#examStartTime!.value! || this.#examEndTime!.value!) {
+    if (
+      this.#examDate!.value! ||
+      this.#examStartTime!.value! ||
+      this.#examEndTime!.value!
+    ) {
       if (!this.#examDate!.value!) {
         this.#examDate!.invalid = true;
         return false;
@@ -262,7 +304,12 @@ export class AddCourseScreen extends Nexscreen {
         return false;
       } else this.#examDate!.invalid = false;
 
-      if (checkIfTimeIsWrong(<Time>this.#examStartTime!.value!, <Time>this.#examEndTime!.value!)) {
+      if (
+        checkIfTimeIsWrong(
+          <Time>this.#examStartTime!.value!,
+          <Time>this.#examEndTime!.value!,
+        )
+      ) {
         this.#examEndTime!.invalid = true;
         return false;
       } else this.#examEndTime!.invalid = false;
@@ -281,20 +328,25 @@ export class AddCourseScreen extends Nexscreen {
     }
 
     if (
-      checkIfTimeIsWrong(<Time>this.#sessionStartTime!.value!, <Time>this.#sessionEndTime!.value!)
+      checkIfTimeIsWrong(
+        <Time>this.#sessionStartTime!.value!,
+        <Time>this.#sessionEndTime!.value!,
+      )
     ) {
       this.#sessionEndTime!.invalid = true;
       return false;
     } else this.#sessionEndTime!.invalid = false;
 
     if (this.#taSessionStartTime!.value! || this.#taSessionEndTime!.value!) {
-      if (this.#taSessionStartTime!.value!) this.#taSessionStartTime!.invalid = false;
+      if (this.#taSessionStartTime!.value!)
+        this.#taSessionStartTime!.invalid = false;
       else {
         this.#taSessionStartTime!.invalid = true;
         return false;
       }
 
-      if (this.#taSessionEndTime!.value!) this.#taSessionEndTime!.invalid = false;
+      if (this.#taSessionEndTime!.value!)
+        this.#taSessionEndTime!.invalid = false;
       else {
         this.#taSessionEndTime!.invalid = true;
         return false;
@@ -317,7 +369,9 @@ export class AddCourseScreen extends Nexscreen {
   #createCourse(): Course {
     return {
       name: this.#courseName!.value!,
-      professor: this.#professorName!.value ? this.#professorName!.value : undefined,
+      professor: this.#professorName!.value
+        ? this.#professorName!.value
+        : undefined,
       sessions: {
         days: this.courseSessionDays!,
         time: {
@@ -326,7 +380,9 @@ export class AddCourseScreen extends Nexscreen {
         },
       },
       exam:
-        this.#examDate!.value && this.#examStartTime!.value && this.#examEndTime!.value
+        this.#examDate!.value &&
+        this.#examStartTime!.value &&
+        this.#examEndTime!.value
           ? {
               date: <ExamDate>this.#examDate!.value!,
               time: {
@@ -335,7 +391,9 @@ export class AddCourseScreen extends Nexscreen {
               },
             }
           : undefined,
-      group: this.#courseGroup!.value! ? Number(this.#courseGroup!.value!) : undefined,
+      group: this.#courseGroup!.value!
+        ? Number(this.#courseGroup!.value!)
+        : undefined,
       ta:
         this.#taSessionStartTime!.value! &&
         this.#taSessionEndTime!.value! &&
@@ -349,7 +407,9 @@ export class AddCourseScreen extends Nexscreen {
                   to: <Time>this.#taSessionEndTime!.value!,
                 },
               },
-              group: this.#taGroup!.value! ? Number(this.#taGroup!.value!) : undefined,
+              group: this.#taGroup!.value!
+                ? Number(this.#taGroup!.value!)
+                : undefined,
             }
           : undefined,
     };
@@ -358,11 +418,13 @@ export class AddCourseScreen extends Nexscreen {
   #submitForm() {
     if (this.#validateForm()) {
       if (!this.courseSessionDays?.length)
-        addDialog({
+        dialogStore.pushQueue({
           headline: 'خطا',
           body: html`
             <section-widget variant="paragraphs">
-              <typography-widget variant="text">روزهای جلسه درس را وارد کنید.</typography-widget>
+              <typography-widget variant="text"
+                >روزهای جلسه درس را وارد کنید.</typography-widget
+              >
             </section-widget>
           `,
         });
@@ -371,7 +433,7 @@ export class AddCourseScreen extends Nexscreen {
         this.#taSessionEndTime!.value! &&
         !this.taSessionDays?.length
       )
-        addDialog({
+        dialogStore.pushQueue({
           headline: 'خطا',
           body: html`
             <section-widget variant="paragraphs">
@@ -384,8 +446,11 @@ export class AddCourseScreen extends Nexscreen {
       else {
         const course = this.#createCourse();
 
-        if (course.ta && checkIfSessionsInterfere(course.sessions, course.ta.sessions))
-          addDialog({
+        if (
+          course.ta &&
+          checkIfSessionsInterfere(course.sessions, course.ta.sessions)
+        )
+          dialogStore.pushQueue({
             headline: 'خطا',
             body: html`
               <section-widget variant="paragraphs">
@@ -396,16 +461,18 @@ export class AddCourseScreen extends Nexscreen {
             `,
           });
         else {
-          const allCourses = [...courses.state];
+          const allCourses = [...coursesStore.courses];
           let hasErrors: boolean = false;
 
           for (const c of allCourses) {
             if (c.name === course.name) {
-              addDialog({
+              dialogStore.pushQueue({
                 headline: 'خطا',
                 body: html`
                   <section-widget variant="paragraphs">
-                    <typography-widget variant="text">نام درس تکراری است.</typography-widget>
+                    <typography-widget variant="text"
+                      >نام درس تکراری است.</typography-widget
+                    >
                   </section-widget>
                 `,
               });
@@ -418,7 +485,7 @@ export class AddCourseScreen extends Nexscreen {
               c.exam === course.exam &&
               checkIfTimesInterfere(course.exam.time, c.exam.time)
             ) {
-              addDialog({
+              dialogStore.pushQueue({
                 headline: 'خطا',
                 body: html`
                   <section-widget variant="paragraphs">
@@ -433,7 +500,7 @@ export class AddCourseScreen extends Nexscreen {
 
               break;
             } else if (checkIfSessionsInterfere(course.sessions, c.sessions)) {
-              addDialog({
+              dialogStore.pushQueue({
                 headline: 'خطا',
                 body: html`
                   <section-widget variant="paragraphs">
@@ -447,13 +514,17 @@ export class AddCourseScreen extends Nexscreen {
               hasErrors = true;
 
               break;
-            } else if (course.ta && checkIfSessionsInterfere(course.ta.sessions, c.sessions)) {
-              addDialog({
+            } else if (
+              course.ta &&
+              checkIfSessionsInterfere(course.ta.sessions, c.sessions)
+            ) {
+              dialogStore.pushQueue({
                 headline: 'خطا',
                 body: html`
                   <section-widget variant="paragraphs">
                     <typography-widget variant="text">
-                      جلسات تدریس‌یار این درس با جلسات درس ${c.name} تداخل دارند.
+                      جلسات تدریس‌یار این درس با جلسات درس ${c.name} تداخل
+                      دارند.
                     </typography-widget>
                   </section-widget>
                 `,
@@ -462,13 +533,17 @@ export class AddCourseScreen extends Nexscreen {
               hasErrors = true;
 
               break;
-            } else if (c.ta && checkIfSessionsInterfere(course.sessions, c.ta.sessions)) {
-              addDialog({
+            } else if (
+              c.ta &&
+              checkIfSessionsInterfere(course.sessions, c.ta.sessions)
+            ) {
+              dialogStore.pushQueue({
                 headline: 'خطا',
                 body: html`
                   <section-widget variant="paragraphs">
                     <typography-widget variant="text">
-                      جلسات این درس با جلسات تدریس‌یار درس ${c.name} تداخل دارند.
+                      جلسات این درس با جلسات تدریس‌یار درس ${c.name} تداخل
+                      دارند.
                     </typography-widget>
                   </section-widget>
                 `,
@@ -482,12 +557,13 @@ export class AddCourseScreen extends Nexscreen {
               c.ta &&
               checkIfSessionsInterfere(course.ta.sessions, c.ta.sessions)
             ) {
-              addDialog({
+              dialogStore.pushQueue({
                 headline: 'خطا',
                 body: html`
                   <section-widget variant="paragraphs">
                     <typography-widget variant="text">
-                      جلسات تدریس‌یار این درس با جلسات تدریس‌یار درس ${c.name} تداخل دارند.
+                      جلسات تدریس‌یار این درس با جلسات تدریس‌یار درس ${c.name}
+                      تداخل دارند.
                     </typography-widget>
                   </section-widget>
                 `,
@@ -500,7 +576,7 @@ export class AddCourseScreen extends Nexscreen {
           }
 
           if (!hasErrors)
-            addDialog({
+            dialogStore.pushQueue({
               headline: 'توجه',
               body: html`
                 <section-widget variant="paragraphs">
@@ -512,9 +588,11 @@ export class AddCourseScreen extends Nexscreen {
               button: {
                 text: 'تایید اطلاعات',
                 action: () => {
-                  addCourse(course);
+                  coursesStore.addCourse(course);
                   history.back();
-                  addSnackbar({ text: `درس ${course.name} افزوده شد.` });
+                  snackbarStore.pushQueue({
+                    text: `درس ${course.name} افزوده شد.`,
+                  });
                 },
               },
             });
@@ -525,16 +603,18 @@ export class AddCourseScreen extends Nexscreen {
 
   override addedCallback() {
     super.addedCallback();
-    setAppBarOptions({
+    appBarStore.setOptions({
       headline: 'افزودن درس',
       leading: {
         icon: 'arrow_forward',
         action: () =>
-          addDialog({
+          dialogStore.pushQueue({
             headline: 'هشدار',
             body: html`
               <section-widget variant="paragraphs">
-                <typography-widget variant="text">آیا می‌خواهید خارج شوید؟</typography-widget>
+                <typography-widget variant="text"
+                  >آیا می‌خواهید خارج شوید؟</typography-widget
+                >
               </section-widget>
             `,
             button: { text: 'خروج', action: () => history.back() },
@@ -562,7 +642,9 @@ export class AddCourseScreen extends Nexscreen {
     );
 
     this.#sessionStartTime = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="sessionStartTime"]')
+      this.shadowRoot!.querySelector(
+        'input-widget[data-key="sessionStartTime"]',
+      )
     );
 
     this.#sessionEndTime = <InputWidget>(
@@ -585,16 +667,24 @@ export class AddCourseScreen extends Nexscreen {
       this.shadowRoot!.querySelector('input-widget[data-key="courseGroup"]')
     );
 
-    this.#taName = <InputWidget>this.shadowRoot!.querySelector('input-widget[data-key="taName"]');
+    this.#taName = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="taName"]')
+    );
 
     this.#taSessionStartTime = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="taSessionStartTime"]')
+      this.shadowRoot!.querySelector(
+        'input-widget[data-key="taSessionStartTime"]',
+      )
     );
 
     this.#taSessionEndTime = <InputWidget>(
-      this.shadowRoot!.querySelector('input-widget[data-key="taSessionEndTime"]')
+      this.shadowRoot!.querySelector(
+        'input-widget[data-key="taSessionEndTime"]',
+      )
     );
 
-    this.#taGroup = <InputWidget>this.shadowRoot!.querySelector('input-widget[data-key="taGroup"]');
+    this.#taGroup = <InputWidget>(
+      this.shadowRoot!.querySelector('input-widget[data-key="taGroup"]')
+    );
   }
 }

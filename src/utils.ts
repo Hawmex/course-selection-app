@@ -5,7 +5,8 @@ export const parseTime = (time: Time) => {
   return hour * 60 + minute;
 };
 
-export const getSessionLength = (start: Time, end: Time) => parseTime(end) - parseTime(start);
+export const getSessionLength = (start: Time, end: Time) =>
+  parseTime(end) - parseTime(start);
 
 export const checkIfTimeIsWrong = (start: Time, end: Time) => {
   const startStamp = parseTime(start);

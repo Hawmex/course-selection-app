@@ -24,7 +24,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "lit-html": "^2.1.2",
+    "lit-html": "^2.1.3",
     "nexinterface": "^6.0.2",
     "nexstate": "^8.0.1",
     "nexwidget": "^7.0.2"
